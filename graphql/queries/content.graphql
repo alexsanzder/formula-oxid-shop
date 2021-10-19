@@ -1,0 +1,8 @@
+#import ../fragments/contentBaseFragment.graphql
+
+query GetContent($contentId: ID!) {
+    content(contentId: $contentId) {
+        ...ContentBaseFragment
+        content
+    }
+}

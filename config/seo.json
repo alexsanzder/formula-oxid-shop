@@ -1,0 +1,26 @@
+{
+    "title": "Formula Storefront | Powered by OXID eSales",
+    "titleTemplate": "%s - Formula Storefront",
+    "description": "Formula eSales - https://www.oxid-esales.com",
+    "openGraph": {
+        "title": "Formula Storefront | Powered by OXID eSales",
+        "description": "Formula = React + GraphQl OXID Shop - https://www.oxid-esales.com",
+        "type": "website",
+        "locale": "en_IE",
+        "url": "https://oxid-esales.com",
+        "site_name": "Formula = React + GraphQl OXID Shop",
+        "images": [
+            {
+                "url": "/card.png",
+                "width": 800,
+                "height": 600,
+                "alt": "OXID eSales"
+            }
+        ]
+    },
+    "twitter": {
+        "handle": "@OXID_eSales",
+        "site": "@OXID_eSales",
+        "cardType": "summary_large_image"
+    }
+}

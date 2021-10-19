@@ -1,0 +1,6 @@
+fragment ContentBaseFragment on Content {
+    id
+    active
+    title
+    folder
+}

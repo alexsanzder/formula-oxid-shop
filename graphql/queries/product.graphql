@@ -1,0 +1,36 @@
+#import ../fragments/productBaseFragment.graphql
+query GetProduct($id: ID!) {
+    product(productId: $id) {
+        ...ProductBaseFragment
+        imageGallery {
+            images {
+                image
+                icon
+                zoom
+            }
+        }
+        variantLabels
+        variants {
+            ...ProductBaseFragment
+            variantValues
+            imageGallery {
+                icon
+            }
+        }
+        categories(onlyMainCategory: false) {
+            parent {
+                parent {
+                    title
+                }
+                title
+            }
+            title
+        }
+        crossSelling {
+            ...ProductBaseFragment
+            imageGallery {
+                thumb
+            }
+        }
+    }
+}

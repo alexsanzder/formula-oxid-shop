@@ -1,0 +1,38 @@
+#import ../fragments/productBaseFragment.graphql
+#import ../fragments/sctionBaseFragment.graphql
+
+query GetHomePage {
+    banners {
+        id
+        active
+        title
+        picture
+    }
+    bargain: action(actionId: "oxbargain") {
+        ...ActionBaseFragment
+        products {
+            ...ProductBaseFragment
+            imageGallery {
+                thumb
+            }
+        }
+    }
+    top: action(actionId: "oxtop5") {
+        ...ActionBaseFragment
+        products {
+            ...ProductBaseFragment
+            imageGallery {
+                thumb
+            }
+        }
+    }
+    newest: action(actionId: "oxnewest") {
+        ...ActionBaseFragment
+        products {
+            ...ProductBaseFragment
+            imageGallery {
+                thumb
+            }
+        }
+    }
+}

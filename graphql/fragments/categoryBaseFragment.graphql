@@ -1,0 +1,5 @@
+fragment CategoryBaseFragment on Category {
+    id
+    active
+    title
+}

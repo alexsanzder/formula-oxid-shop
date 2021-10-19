@@ -1,0 +1,38 @@
+hooks:
+    afterAllFileWrite:
+        - prettier --write
+overwrite: true
+schema:
+    - ${NEXT_PUBLIC_OXID_GRAPHQL_ENDPOINT}
+#          headers:
+#              Authorization: "Bearer ${NEXT_PUBLIC_GRAPHQL_API_KEY}"
+documents: "graphql/**/*.graphql"
+generates:
+    generated/types.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - named-operations-object
+    generated/graphql.tsx:
+        plugins:
+            - "typescript"
+            - "typescript-operations"
+            - "typescript-react-apollo"
+    generated/graphql.schema.json:
+        plugins:
+            - "introspection"
+    generated/pages.tsx:
+        config:
+            documentMode: external
+            importDocumentNodeExternallyFrom: ./graphql
+            reactApolloVersion: 3
+            withHooks: true
+            withHOC: false
+            contextType: "ApolloClientContext"
+            contextTypeRequired: false
+            apolloClientInstanceImport: "@lib/withApollo"
+        preset: import-types
+        presetConfig:
+            typesPath: ./types
+        plugins:
+            - "graphql-codegen-apollo-next-ssr"

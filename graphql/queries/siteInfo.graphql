@@ -1,0 +1,17 @@
+#import ../fragments/categoryBaseFragment.graphql
+
+query GetSiteInfo($filter: CategoryFilterList) {
+    categories(filter: $filter) {
+        ...CategoryBaseFragment
+        children {
+            ...CategoryBaseFragment
+        }
+    }
+
+    manufacturers {
+        id
+        active
+        title
+        icon
+    }
+}
