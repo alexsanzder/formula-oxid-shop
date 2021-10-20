@@ -38,15 +38,15 @@ const Header = ({ categories }: HeaderProps) => {
 
     return (
         <header>
-            <div className="font-medium">
+            <div className="relative font-medium">
                 <div
                     className={clsx(
-                        "dark:bg-gray-400 dark:text-gray-900 bg-gray-100 flex items-center justify-center py-2 space-x-2 text-xs text-gray-600"
+                        "dark:bg-gray-600 dark:text-gray-200 bg-gray-200 flex items-center  justify-center py-2 space-x-2 text-xs text-gray-700"
                     )}
                 >
                     <span>Formula = React + GraphQL OXID Shop.</span>
                     <a
-                        className="px-4 py-0.5 text-white bg-black rounded-full"
+                        className="px-4 py-0.5 text-white hover:bg-gray-400 border hover:text-gray-800 hover:border-gray-600 bg-black dark:bg-transparent dark:border dark:hover:text-gray-600  dark:hover:bg-gray-200 rounded-full"
                         href="https://github.com/alexsanzder/formula-oxid-shop"
                     >
                         Learn more
@@ -54,11 +54,11 @@ const Header = ({ categories }: HeaderProps) => {
                 </div>
                 <div
                     className={clsx(
-                        "transition ease-in-out dark:border-gray-600 border-b border-gray-200 dark:bg-gray-900 z-40 w-full bg-white dark:border-b shadow-lg",
-                        isScrolled ? "fixed top-0" : "relative"
+                        "transition ease-in-out dark:bg-gray-900 z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300 shadow-lg",
+                        isScrolled ? "fixed top-0 inset-x-0" : "relative"
                     )}
                 >
-                    <div className="w-full border-b border-gray-200">
+                    <div className="dark:border-gray-600 w-full border-b border-gray-300">
                         <div className="max-w-7xl flex items-center p-4 mx-auto text-sm">
                             <Link href="/">
                                 <a className="text-2xl font-semibold tracking-tight">
@@ -72,7 +72,11 @@ const Header = ({ categories }: HeaderProps) => {
                                     Sign In
                                 </button>
                                 <button
-                                    className="dark:bg-transparent dark:hover:text-gray-400 hover:border-gray-600 bg-opacity-60 hover:text-gray-600 bg-gray-50 p-2 border border-gray-200 rounded-full"
+                                    className={clsx(
+                                        " bg-opacity-60 bg-gray-50 p-2 border border-gray-200 rounded-full",
+                                        "dark:bg-transparent dark:hover:text-gray-400",
+                                        "hover:border-gray-600 hover:text-gray-600 hover:bg-gray-100"
+                                    )}
                                     onClick={switchTheme}
                                 >
                                     <svg
@@ -99,7 +103,13 @@ const Header = ({ categories }: HeaderProps) => {
                                         )}
                                     </svg>
                                 </button>
-                                <button className="dark:bg-transparent dark:hover:text-gray-400 hover:border-gray-600 bg-opacity-60 hover:text-gray-600 bg-gray-50 p-2 border border-gray-200 rounded-full">
+                                <button
+                                    className={clsx(
+                                        " bg-opacity-60 bg-gray-50 p-2 border border-gray-200 rounded-full",
+                                        "dark:bg-transparent dark:hover:text-gray-400",
+                                        "hover:border-gray-600 hover:text-gray-600 hover:bg-gray-100"
+                                    )}
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="w-5 h-5"
@@ -121,7 +131,13 @@ const Header = ({ categories }: HeaderProps) => {
 
                     <div className="max-w-7xl flex items-center justify-between px-4 mx-auto text-xs">
                         <Navbar categories={categories} />
-                        <button className="dark:text-gray-200 dark:bg-transparent dark:border-gray-600 bg-gray-50 flex items-center px-4 py-px space-x-1 text-gray-500 border border-gray-300 rounded-full">
+                        <button
+                            className={clsx(
+                                "bg-gray-50 bg-opacity-60 flex items-center px-4 py-px space-x-1 text-gray-600 border border-gray-400  rounded-full",
+                                "dark:bg-transparent dark:hover:text-gray-400 dark:text-gray-50",
+                                "hover:border-gray-600 hover:text-gray-600 hover:bg-gray-100"
+                            )}
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="w-5 h-5"
@@ -136,13 +152,12 @@ const Header = ({ categories }: HeaderProps) => {
                                     d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
                                 />
                             </svg>
-                            <span className="dark:text-gray-50 text-gray-800">
-                                Invite a friend
-                            </span>
+                            <span>Invite a friend</span>
                         </button>
                     </div>
                 </div>
             </div>
+            {/* Avoid hero image jump at scroll*/}
             <div
                 className={clsx(" h-[122px]", isScrolled ? "block" : "hidden")}
             />

@@ -5,7 +5,6 @@ const Portal: FC = ({ children }) => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        console.log(mounted);
         setMounted(true);
         return () => setMounted(false);
     }, []);

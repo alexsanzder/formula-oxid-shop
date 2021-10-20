@@ -5,9 +5,3 @@
 @import "./components.css";
 
 @tailwind utilities;
-
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-    appearance: none;
-}
