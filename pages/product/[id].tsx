@@ -7,59 +7,22 @@ import {
 import { useRouter } from "next/router";
 import Layout from "@components/Layout";
 import ProductView from "@components/ProductView";
-import {
-    ssrGetContents,
-    ssrGetProduct,
-    ssrGetProducts,
-    ssrGetSiteInfo,
-} from "@generated/pages";
+import { ssrGetProducts, ssrGetProductSite } from "@generated/pages";
 
 export const getStaticProps = async ({
     params,
 }: GetStaticPropsContext<{ id: string }>) => {
     const {
-        props: {
-            data: { categories, manufacturers },
-        },
-    } = await ssrGetSiteInfo.getServerPage({
-        variables: {
-            filter: {
-                parentId: {
-                    equals: "oxrootid",
-                },
-            },
-        },
-    });
-
-    const {
-        props: {
-            data: { contents },
-        },
-    } = await ssrGetContents.getServerPage({}, { req: undefined });
-    const pages = contents
-        ? contents.filter((content) => content.active === true)
-        : [];
-
-    const {
-        props: {
-            data: { product },
-            error: productError,
-        },
-    } = await ssrGetProduct.getServerPage({
+        props: { data, error },
+    } = await ssrGetProductSite.getServerPage({
         variables: { id: params!.id },
     });
-    if (productError) {
-        console.log(productError);
+    if (error) {
         throw new Error(`Product with id '${params!.id}' not found`);
     }
 
     return {
-        props: {
-            categories,
-            manufacturers,
-            pages,
-            product,
-        },
+        props: data,
         revalidate: 200,
     };
 };

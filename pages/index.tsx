@@ -8,58 +8,29 @@ import Slider from "react-slick";
 
 import Layout from "@components/Layout";
 import GridView from "@components/GridView";
-import { ssrGetSiteInfo, ssrGetHome, ssrGetContents } from "@generated/pages";
 import Marquee from "@components/Marquee";
+
+import { ssrGetHomeSite } from "@generated/pages";
 
 export const getStaticProps = async () => {
     const {
-        props: {
-            data: { categories, manufacturers },
-        },
-    } = await ssrGetSiteInfo.getServerPage({
-        variables: {
-            filter: {
-                parentId: {
-                    equals: "oxrootid",
-                },
-            },
-        },
-    });
-
-    const {
-        props: {
-            data: { contents },
-        },
-    } = await ssrGetContents.getServerPage({}, { req: undefined });
-    const pages = contents
-        ? contents.filter((content) => content.active === true)
-        : [];
-
-    const {
-        props: {
-            data: { banners, bargain, top, newest },
-        },
-    } = await ssrGetHome.getServerPage({});
+        props: { data, error },
+    } = await ssrGetHomeSite.getServerPage({});
+    if (error) {
+        throw new Error(`Home page error: ${error}`);
+    }
 
     return {
-        props: {
-            bargain,
-            banners,
-            categories,
-            newest,
-            manufacturers,
-            pages,
-            top,
-        },
+        props: data,
         revalidate: 60,
     };
 };
 
 const Home = ({
-    bargain,
     banners,
-    newest,
+    bargain,
     manufacturers,
+    newest,
     top,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
     var sliderSettings = {

@@ -8,56 +8,29 @@ import { useRouter } from "next/router";
 
 import Layout from "@components/Layout";
 import Text from "@components/Text";
-import {
-    ssrGetContent,
-    ssrGetContents,
-    ssrGetSiteInfo,
-} from "@generated/pages";
+import { ssrGetContents, ssrGetSites } from "@generated/pages";
 
 export const getStaticProps = async ({
     params,
 }: GetStaticPropsContext<{ pages: string[] }>) => {
     const {
-        props: {
-            data: { categories, manufacturers },
-        },
-    } = await ssrGetSiteInfo.getServerPage({
-        variables: {
-            filter: {
-                parentId: {
-                    equals: "oxrootid",
-                },
-            },
-        },
-    });
-
-    const {
-        props: {
-            data: { contents },
-        },
-    } = await ssrGetContents.getServerPage({}, { req: undefined });
-    const pages = contents
-        ? contents.filter((content) => content.active === true)
-        : [];
-
-    const {
-        props: {
-            data: { content: page },
-            error,
-        },
-    } = await ssrGetContent.getServerPage({
+        props: { data, error },
+    } = await ssrGetSites.getServerPage({
         variables: { contentId: params!.pages[0] },
     });
+
     if (error) {
         throw new Error(`Page with id '${params!.pages[0]}' not found`);
     }
 
+    const pages = data.pages
+        ? data.pages.filter((page) => page.active === true)
+        : [];
+
     return {
         props: {
-            categories,
-            manufacturers,
+            ...data,
             pages,
-            page,
         },
         revalidate: 60 * 60, // Every hour
     };

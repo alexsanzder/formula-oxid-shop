@@ -1,13 +1,21 @@
-#import ../fragments/productBaseFragment.graphql
-#import ../fragments/sctionBaseFragment.graphql
+#import ../../fragments/productBaseFragment.graphql
+#import ../../fragments/actionBaseFragment.graphql
 
-query GetHomePage {
+query GetHomeSite {
     banners {
         id
         active
         title
         picture
     }
+
+    categories(filter: { parentId: { equals: "oxrootid" } }) {
+        ...CategoryBaseFragment
+        children {
+            ...CategoryBaseFragment
+        }
+    }
+
     bargain: action(actionId: "oxbargain") {
         ...ActionBaseFragment
         products {
@@ -17,7 +25,15 @@ query GetHomePage {
             }
         }
     }
-    top: action(actionId: "oxtop5") {
+
+    manufacturers {
+        id
+        active
+        title
+        icon
+    }
+
+    newest: action(actionId: "oxnewest") {
         ...ActionBaseFragment
         products {
             ...ProductBaseFragment
@@ -26,7 +42,12 @@ query GetHomePage {
             }
         }
     }
-    newest: action(actionId: "oxnewest") {
+
+    pages: contents {
+        ...ContentBaseFragment
+    }
+
+    top: action(actionId: "oxtop5") {
         ...ActionBaseFragment
         products {
             ...ProductBaseFragment
