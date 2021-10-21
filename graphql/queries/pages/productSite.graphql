@@ -3,62 +3,62 @@
 #import ../../fragments/productBaseFragment.graphql
 
 query GetProductSite($id: ID!) {
-    categories(filter: { parentId: { equals: "oxrootid" } }) {
-        ...CategoryBaseFragment
-        children {
-            ...CategoryBaseFragment
-        }
+  rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
     }
+  }
 
-    pages: contents {
-        ...ContentBaseFragment
+  pages: contents {
+    ...ContentBaseFragment
+  }
+
+  products {
+    ...ProductBaseFragment
+    imageGallery {
+      thumb
     }
+  }
 
-    products {
-        ...ProductBaseFragment
-        imageGallery {
-            thumb
-        }
-    }
-
-    product(productId: $id) {
-        ...ProductBaseFragment
-        imageGallery {
-            images {
-                image
-                icon
-                zoom
-            }
-        }
-        variantLabels
-        variants {
-            ...ProductBaseFragment
-            variantValues
-            imageGallery {
-                icon
-            }
-        }
-        categories(onlyMainCategory: false) {
-            parent {
-                parent {
-                    title
-                }
-                title
-            }
-            title
-        }
-        crossSelling {
-            ...ProductBaseFragment
-            imageGallery {
-                thumb
-            }
-        }
-    }
-
-    manufacturers {
-        id
-        active
-        title
+  product(productId: $id) {
+    ...ProductBaseFragment
+    imageGallery {
+      images {
+        image
         icon
+        zoom
+      }
     }
+    variantLabels
+    variants {
+      ...ProductBaseFragment
+      variantValues
+      imageGallery {
+        icon
+      }
+    }
+    categories(onlyMainCategory: false) {
+      parent {
+        parent {
+          title
+        }
+        title
+      }
+      title
+    }
+    crossSelling {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
+    }
+  }
+
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
 }

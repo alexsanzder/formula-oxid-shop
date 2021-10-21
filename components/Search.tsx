@@ -1,116 +1,144 @@
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { useSearch } from "@context/SearchContext";
-import { PageGetProductsComp, ssrGetProducts } from "@generated/pages";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const Search: PageGetProductsComp = ({ data }) => {
-    const router = useRouter();
-    const [products, setProducts] = useState(data?.products);
+import Layout from './Layout';
 
-    useEffect(() => {
-        data && setProducts(data.products);
-    }, [data]);
+import { filterQuery, useSearchMeta } from '@lib/search';
+import { InferGetStaticPropsType } from 'next';
+import { getStaticProps } from '@pages/search';
+import { useState } from 'react';
+import clsx from 'clsx';
+import ProductCard from './ProductCard';
+import { Product } from '@generated/types';
+import SearchSidebar from './SearchSidebar';
+import SearchSort from './SearchSort';
+import Skeleton from './Skeleton';
+import rangeMap from '@lib/range-map';
 
-    const [inputValue, setInputValue] = useState<string>("");
-    const inputRef = useRef<HTMLInputElement | null>(null);
+const Search = ({
+  products,
+  categories,
+  brands,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [activeFilter, setActiveFilter] = useState('');
+  const [toggleFilter, setToggleFilter] = useState(false);
 
-    const { setSuggestions } = useSearch();
+  const router = useRouter();
+  const { asPath, locale } = router;
+  const { q, sort } = router.query;
+  // `q` can be included but because categories and Branders can't be searched
+  // in the same way of products, it's better to ignore the search input if one
+  // of those is selected
+  const query = filterQuery({ sort });
 
-    const getFilteredRows = (products: any, filterKey: string) => {
-        return products?.filter((product: any) => {
-            return (
-                product!.title!.toLowerCase().indexOf(filterKey.toLowerCase()) >
-                    -1 ||
-                product!
-                    .shortDescription!.toLowerCase()
-                    .indexOf(filterKey.toLowerCase()) > -1
-            );
-        });
-    };
+  const { pathname, category, brand } = useSearchMeta(asPath);
+  const activeCategory = categories.find((c) => c.title.toLowerCase() === category);
+  const activeBrand = brands.find((b) => b.title.toLowerCase() === brand);
 
-    useEffect(() => {
-        setSuggestions(getFilteredRows(products, inputValue));
-    }, [inputValue]);
+  const handleClick = (e: any, filter: string) => {
+    if (filter !== activeFilter) {
+      setToggleFilter(true);
+    } else {
+      setToggleFilter(!toggleFilter);
+    }
+    setActiveFilter(filter);
+  };
+  const data: any = undefined;
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        if (value && value !== "") {
-            setInputValue(value);
-            router.push("/search");
-        } else onClear();
-    };
+  return (
+    <div className="container flex flex-col items-center justify-between px-4 py-8 mx-auto">
+      <div className="lg:grid-cols-12 grid grid-cols-1 gap-4 mt-3 mb-20">
+        {/* Sidebar */}
+        <SearchSidebar
+          activeFilter={activeFilter}
+          toggleFilter={toggleFilter}
+          categories={categories}
+          activeCategory={activeCategory}
+          brands={brands}
+          activeBrand={activeBrand}
+          handleClick={handleClick}
+          query={query}
+        />
 
-    const onClear = () => {
-        setInputValue("");
-    };
-
-    const onFocus = () => {
-        inputRef?.current?.focus();
-    };
-
-    return (
-        <div className="flex-1 px-8 rounded-full">
-            <div className="relative flex items-center rounded-full">
-                <input
-                    className="dark:bg-black dark:text-gray-100 dark:focus:ring-gray-100 dark:border-gray-600 focus:ring-gray-600 focus:outline-none focus:ring-1 focus:ring-opacity-90 focus:border-transparent focus:bg-white border-gray-100 bg-opacity-60 rounded-3xl w-full px-5 py-2.5 text-sm text-gray-800 bg-gray-100 border"
-                    type="search"
-                    placeholder="Search for anything..."
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    ref={inputRef}
-                />
-                {inputValue && inputValue.trim().length > 0 ? (
-                    <button
-                        className="dark:bg-transparent dark:text-gray-100 right-5 absolute text-gray-700"
-                        type="button"
-                        aria-label="Clear search input"
-                        onClick={onClear}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </button>
-                ) : (
-                    <button
-                        className="dark:bg-transparent dark:text-gray-400 right-5 cursor-text absolute text-gray-700"
-                        type="button"
-                        aria-label="Focus search input"
-                        onClick={onFocus}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </button>
-                )}
+        {/* Products */}
+        <div className="lg:order-none order-3 col-span-8">
+          {(q || activeCategory || activeBrand) && (
+            <div className="mt-4 mb-8 text-lg transition duration-75 ease-in">
+              {data ? (
+                <>
+                  <span
+                    className={clsx('animate-pulse', {
+                      fadeIn: data.found,
+                      hidden: !data.found,
+                    })}
+                  >
+                    Showing {data?.products?.length} results{' '}
+                    {q && (
+                      <>
+                        for "<strong>{q}</strong>"
+                      </>
+                    )}
+                  </span>
+                  <span
+                    className={clsx('animate-pulse', {
+                      fadeIn: !data.found,
+                      hidden: data.found,
+                    })}
+                  >
+                    {q ? (
+                      <>
+                        There are no products that match "<strong>{q}</strong>"
+                      </>
+                    ) : (
+                      <>There are no products that match the selected category.</>
+                    )}
+                  </span>
+                </>
+              ) : q ? (
+                <>
+                  Searching for: "<strong>{q}</strong>"
+                </>
+              ) : (
+                <>Searching...</>
+              )}
             </div>
+          )}
+          {data && data.products ? (
+            <div className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
+              {data &&
+                data.products?.map((product: Product) => (
+                  <ProductCard
+                    key={product.id}
+                    className="animate-pulse fadeIn"
+                    product={product}
+                    imgProps={{
+                      width: 480,
+                      height: 480,
+                    }}
+                  />
+                ))}
+            </div>
+          ) : (
+            <div className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
+              {rangeMap(12, (i) => (
+                <Skeleton key={i}>
+                  <div className="w-60 h-72" />
+                </Skeleton>
+              ))}
+            </div>
+          )}{' '}
         </div>
-    );
+
+        {/* Sort */}
+        <SearchSort
+          activeFilter={activeFilter}
+          toggleFilter={toggleFilter}
+          handleClick={handleClick}
+        />
+      </div>
+    </div>
+  );
 };
 
-export const getStaticProps = async () => {
-    return await ssrGetProducts.getServerPage({});
-};
-
+Search.Layout = Layout;
 export default Search;

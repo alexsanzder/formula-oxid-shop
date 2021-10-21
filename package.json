@@ -1,10 +1,19 @@
 {
-  "private": true,
+  "name": "formula-oxid-shop",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 4000",
-    "generate": "graphql-codegen --config codegen.yml -r dotenv/config"
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "BUNDLE_ANALYZE=both yarn build",
+    "prettier-fix": "prettier --write .",
+    "find:unused": "npx next-unused",
+    "generate": "graphql-codegen --config -r dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
@@ -36,10 +45,59 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-slick": "^0.23.6",
     "autoprefixer": "^10.2.6",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
     "graphql-codegen-apollo-next-ssr": "^1.7.0",
+    "husky": "^7.0.4",
     "postcss": "^8.3.5",
     "prettier": "^2.4.0",
     "tailwindcss": "^2.2.4",
     "typescript": "^4.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{md,mdx,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "next-unused": {
+    "alias": {
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ]
+    },
+    "debug": true,
+    "include": [
+      "components",
+      "lib",
+      "pages"
+    ],
+    "exclude": [],
+    "entrypoints": [
+      "pages"
+    ]
   }
 }

@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Search from '@components/Search';
 import { ssrGetSearchSite } from '@generated/pages';
 
@@ -13,5 +15,12 @@ export const getStaticProps = async () => {
     revalidate: 200,
   };
 };
+
+export function getStaticPaths(): GetStaticPathsResult {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+}
 
 export default Search;

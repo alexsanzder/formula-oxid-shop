@@ -2,26 +2,26 @@
 #import ../../fragments/contentBaseFragment.graphql
 
 query GetSites($contentId: ID!) {
-    categories(filter: { parentId: { equals: "oxrootid" } }) {
-        ...CategoryBaseFragment
-        children {
-            ...CategoryBaseFragment
-        }
+  rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
     }
+  }
 
-    pages: contents {
-        ...ContentBaseFragment
-    }
+  pages: contents {
+    ...ContentBaseFragment
+  }
 
-    page: content(contentId: $contentId) {
-        ...ContentBaseFragment
-        content
-    }
+  page: content(contentId: $contentId) {
+    ...ContentBaseFragment
+    content
+  }
 
-    manufacturers {
-        id
-        active
-        title
-        icon
-    }
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
 }

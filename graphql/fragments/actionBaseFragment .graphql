@@ -1,5 +1,5 @@
 fragment ActionBaseFragment on Action {
-    id
-    active
-    title
+  id
+  active
+  title
 }

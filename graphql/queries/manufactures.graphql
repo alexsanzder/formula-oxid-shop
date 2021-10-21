@@ -1,8 +1,8 @@
 query GetManufactures {
-    manufacturers {
-        id
-        active
-        title
-        icon
-    }
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
 }

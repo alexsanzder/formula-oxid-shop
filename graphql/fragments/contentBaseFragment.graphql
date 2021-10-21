@@ -1,6 +1,6 @@
 fragment ContentBaseFragment on Content {
-    id
-    active
-    title
-    folder
+  id
+  active
+  title
+  folder
 }

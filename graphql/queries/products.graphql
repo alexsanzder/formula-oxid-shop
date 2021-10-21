@@ -1,9 +1,9 @@
 #import ../fragments/productBaseFragment.graphql
 query GetProducts {
-    products {
-        ...ProductBaseFragment
-        imageGallery {
-            thumb
-        }
+  products {
+    ...ProductBaseFragment
+    imageGallery {
+      thumb
     }
+  }
 }

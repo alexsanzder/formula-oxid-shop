@@ -1,7 +1,7 @@
 #import ../fragments/contentBaseFragment.graphql
 
 query GetContents {
-    contents {
-        ...ContentBaseFragment
-    }
+  contents {
+    ...ContentBaseFragment
+  }
 }

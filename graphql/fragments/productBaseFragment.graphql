@@ -1,19 +1,19 @@
 fragment ProductBaseFragment on Product {
-    id
-    active
-    title
-    seo {
-        url
+  id
+  active
+  title
+  seo {
+    url
+  }
+  price {
+    currency {
+      sign
     }
-    price {
-        currency {
-            sign
-        }
-        price
-    }
-    rating {
-        rating
-        count
-    }
-    shortDescription
+    price
+  }
+  rating {
+    rating
+    count
+  }
+  shortDescription
 }

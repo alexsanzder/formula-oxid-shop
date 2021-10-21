@@ -2,58 +2,58 @@
 #import ../../fragments/actionBaseFragment.graphql
 
 query GetHomeSite {
-    banners {
-        id
-        active
-        title
-        picture
-    }
+  banners {
+    id
+    active
+    title
+    picture
+  }
 
-    categories(filter: { parentId: { equals: "oxrootid" } }) {
-        ...CategoryBaseFragment
-        children {
-            ...CategoryBaseFragment
-        }
+  rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
     }
+  }
 
-    bargain: action(actionId: "oxbargain") {
-        ...ActionBaseFragment
-        products {
-            ...ProductBaseFragment
-            imageGallery {
-                thumb
-            }
-        }
+  bargain: action(actionId: "oxbargain") {
+    ...ActionBaseFragment
+    products {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
     }
+  }
 
-    manufacturers {
-        id
-        active
-        title
-        icon
-    }
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
 
-    newest: action(actionId: "oxnewest") {
-        ...ActionBaseFragment
-        products {
-            ...ProductBaseFragment
-            imageGallery {
-                thumb
-            }
-        }
+  newest: action(actionId: "oxnewest") {
+    ...ActionBaseFragment
+    products {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
     }
+  }
 
-    pages: contents {
-        ...ContentBaseFragment
-    }
+  pages: contents {
+    ...ContentBaseFragment
+  }
 
-    top: action(actionId: "oxtop5") {
-        ...ActionBaseFragment
-        products {
-            ...ProductBaseFragment
-            imageGallery {
-                thumb
-            }
-        }
+  top: action(actionId: "oxtop5") {
+    ...ActionBaseFragment
+    products {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
     }
+  }
 }

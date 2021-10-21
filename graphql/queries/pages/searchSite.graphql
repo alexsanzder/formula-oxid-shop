@@ -1,0 +1,36 @@
+#import ../../fragments/productBaseFragment.graphql
+#import ../../fragments/actionBaseFragment.graphql
+
+query GetSearchSite {
+  categories {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
+    }
+  }
+
+  rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
+    }
+  }
+
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
+
+  pages: contents {
+    ...ContentBaseFragment
+  }
+
+  products {
+    ...ProductBaseFragment
+    imageGallery {
+      thumb
+    }
+  }
+}

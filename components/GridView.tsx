@@ -1,21 +1,16 @@
-import ProductCard from "@components/ProductCard";
-import { Product } from "@generated/types";
+import ProductCard from '@components/ProductCard';
+import { GetProductSiteQuery } from '@generated/types';
 
 export interface GridProps {
-    items: any[];
+  items: GetProductSiteQuery['products'];
 }
 
 const GridView = ({ items }: GridProps) => {
-    return (
-        <ul className="flex flex-col items-center justify-center">
-            <div className="sm:grid sm:grid-cols-4 sm:gap-8 w-full">
-                {items &&
-                    items.map((item: Partial<Product>) => (
-                        <ProductCard key={item.id} product={item} />
-                    ))}
-            </div>
-        </ul>
-    );
+  return (
+    <ul className="sm:grid-cols-2 lg:grid-cols-4 grid w-full grid-cols-1 gap-8">
+      {items && items!.map((item) => <ProductCard key={item.id} product={item} />)}
+    </ul>
+  );
 };
 
 export default GridView;
