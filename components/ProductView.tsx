@@ -52,7 +52,7 @@ const ProductView = ({ product }: GetProductQuery) => {
   );
   return (
     <>
-      <div className="container flex items-start justify-between flex-1 w-full p-4 mx-auto mt-4">
+      <aside className="container flex items-start justify-between w-full mx-auto">
         <div className="flex justify-center px-4">
           <div className="relative flex flex-col items-start justify-start mr-4">
             {product.imageGallery.images.map((image: any, idx: number) => (
@@ -83,7 +83,7 @@ const ProductView = ({ product }: GetProductQuery) => {
           />
         </div>
         <div className="relative flex flex-col">
-          <div className="w-96 px-6 py-4">
+          <div className="w-96 flex flex-col px-6">
             <p className="py-2 text-xs text-gray-600">
               {product.categories[0].parent && product.categories[0].parent.parent
                 ? `${product.categories[0].parent.parent.title} / `
@@ -198,7 +198,6 @@ const ProductView = ({ product }: GetProductQuery) => {
                   </div>
                 ))
               : null}
-
             <div className="flex w-full pt-6 space-x-2">
               <div className="rounded-3 flex justify-around w-20 py-4 text-sm border border-gray-300">
                 <div className="text-gray-300" role="button" tabIndex={0}>
@@ -215,9 +214,9 @@ const ProductView = ({ product }: GetProductQuery) => {
             </div>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div className="container flex flex-col items-center justify-between px-4 py-8 mx-auto">
+      <div className="container flex flex-col items-center justify-between mx-auto">
         <div className="w-full py-8">
           <h2 className="text-xl font-semibold text-gray-700 capitalize">Related Products</h2>
           <GridView items={product.crossSelling} />
