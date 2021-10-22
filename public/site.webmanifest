@@ -1,6 +1,6 @@
 {
-    "name": "OXID eSales",
-    "short_name": "OXID eSales",
+    "name": "Formula OXID Storefront",
+    "short_name": "Formula Storefront",
     "description": "OXID eSales -> https://www.oxid-esales.com",
     "display": "standalone",
     "start_url": "/",

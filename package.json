@@ -1,6 +1,7 @@
 {
-  "name": "formula-oxid-shop",
+  "name": "formula-oxid-storefront",
   "version": "1.0.0",
+  "author": "@alexsanzder",
   "license": "MIT",
   "engines": {
     "node": ">=14.x"

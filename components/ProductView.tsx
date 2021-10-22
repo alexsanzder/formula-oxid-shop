@@ -41,7 +41,6 @@ const ProductView = ({ product }: GetProductQuery) => {
   const [isShadowed, setIsShadowed] = useState(false);
   useScrollPosition(
     ({ currPos }) => {
-      console.log(currPos.y);
       setIsShadowed(currPos.y >= 288);
     },
     [isSticky, isShadowed],
