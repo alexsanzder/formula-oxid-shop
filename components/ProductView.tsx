@@ -112,7 +112,7 @@ const ProductView = ({ product }: GetProductQuery) => {
             </div>
             <div
               className={clsx(
-                'flex flex-col w-96 p-6 sticky mt-6 top-36',
+                'flex flex-col w-96 p-6 sticky mt-3 top-36',
                 isShadowed && 'rounded-sm shadow-xl'
               )}
             >
