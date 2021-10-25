@@ -35,7 +35,7 @@ const ProductCard = ({ className, product, imgProps }: ListItemProps) => {
           </div>
           <div>
             <h2 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: title || '' }} />
-            <span className="font-semibold text-gray-700">{`${price?.price} ${price?.currency.sign}`}</span>
+            <span className="dark:text-gray-300 font-semibold text-gray-700">{`${price?.price} ${price?.currency.sign}`}</span>
           </div>
         </a>
       </Link>

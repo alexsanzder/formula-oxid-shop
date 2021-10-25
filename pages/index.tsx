@@ -65,19 +65,19 @@ const Home = ({
             )
         )}
       </Slider>
-      <div className="container flex flex-col items-center justify-between px-4 py-8 mx-auto mt-12">
+      <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto mt-12">
         <h2
-          className="px-4 py-1 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
           dangerouslySetInnerHTML={{
             __html: bargain.title,
           }}
         />
-        <GridView items={bargain.products} />
+        <GridView className="py-2" items={bargain.products} />
       </div>
 
-      <div className="bg-gray-100">
-        <div className="container flex flex-col items-center justify-between w-full px-4 py-8 mx-auto">
-          <h2 className="px-4 py-1 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300">
+      <div className="dark:bg-gray-800 mb-6 bg-gray-100">
+        <div className="container flex flex-col items-center justify-between w-full px-4 py-12 mx-auto">
+          <h2 className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300">
             Our brands
           </h2>
         </div>
@@ -105,21 +105,21 @@ const Home = ({
 
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
         <h2
-          className="px-4 py-1 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
           dangerouslySetInnerHTML={{
             __html: newest.title,
           }}
         />
-        <GridView items={newest.products} />
+        <GridView className="py-2" items={newest.products} />
       </div>
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
         <h2
-          className="px-4 py-1 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
           dangerouslySetInnerHTML={{
             __html: top.title,
           }}
         />
-        <GridView items={top.products} />
+        <GridView className="py-2" items={top.products} />
       </div>
     </div>
   );

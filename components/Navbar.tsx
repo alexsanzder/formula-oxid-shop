@@ -27,7 +27,7 @@ const Navbar = ({ categories }: NavbarProps) => {
             <div
               className={clsx(
                 'absolute inset-x-0 z-40 hidden transition-all duration-700 ease-in-out bg-white border-t border-gray-300 shadow-lg',
-                'dark:bg-gray-900 dark:text-gray-50 dark:border-gray-600',
+                'dark:bg-gray-800 dark:text-gray-50 dark:border-gray-600 dark:shadow-xl',
                 'group-hover:block '
               )}
             >

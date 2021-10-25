@@ -129,7 +129,6 @@ const Header = ({ categories }: HeaderProps) => {
             </div>
           </div>
         </div>
-
         <div className="container flex items-center justify-between mx-auto text-xs">
           <Navbar categories={categories} />
           <button
@@ -157,8 +156,6 @@ const Header = ({ categories }: HeaderProps) => {
           </button>
         </div>
       </header>
-      {/* Avoid hero image jump at scroll*/}
-      {/* <div className={clsx(' h-[122px]', isScrolled ? 'block' : 'hidden')} /> */}
     </>
   );
 };
