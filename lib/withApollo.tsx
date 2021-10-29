@@ -22,7 +22,7 @@ export type ApolloClientContext = {
 };
 
 // eslint-disable-next-line react/display-name
-export const withApollo = (Component: NextPage) => (props: any) => {
+export const withApollo = (Component: any) => (props: any) => {
   return (
     <ApolloProvider client={getApolloClient(undefined, props.apolloState)}>
       <Component />

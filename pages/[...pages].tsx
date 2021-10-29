@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }: GetStaticPaths
 
   const paths = locales
     ? locales.reduce<string[]>((arr, locale) => {
-        // Add a page path for every locale
+        // TODO add a page path for every locale
         pages.forEach((page) => {
           arr.push(`/${locale}/${page.id}`);
         });

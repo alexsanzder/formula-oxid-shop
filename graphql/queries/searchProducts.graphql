@@ -1,0 +1,9 @@
+#import ../fragments/productBaseFragment.graphql
+query SearchProducts($filter: ProductFilterList) {
+  products(filter: $filter) {
+    ...ProductBaseFragment
+    imageGallery {
+      thumb
+    }
+  }
+}

@@ -10,7 +10,7 @@ interface FooterProps {
 const links = [
   {
     title: 'Home',
-    id: '/',
+    id: '',
   },
 ];
 
@@ -19,7 +19,7 @@ const Footer = ({ pages, brands }: FooterProps) => {
   return (
     <footer className="text-gray-50 dark:border-gray-600 transition-colors duration-150 bg-black border-t border-gray-100">
       <div className="lg:grid-cols-4 container grid grid-cols-1 gap-8 py-12 mx-auto">
-        <div className="col-span-1">
+        <div className="flex flex-row col-span-1">
           <Link href="/">
             <a className="flex items-center flex-initial font-bold">
               <span className="mr-2">Powered by</span>
@@ -33,7 +33,7 @@ const Footer = ({ pages, brands }: FooterProps) => {
         <div className="grid">
           {[...links, ...sitePages].map((page) => (
             <span key={page.id} className="py-2">
-              <Link href={`${page.id}`}>
+              <Link href={`/${page.id}`}>
                 <a className="hover:underline transition duration-150 ease-in-out">{page.title}</a>
               </Link>
             </span>

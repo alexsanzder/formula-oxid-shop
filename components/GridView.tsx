@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 export interface GridProps {
   items: GetProductSiteQuery['products'];
-  className: string;
+  className?: string;
 }
 
 const GridView = ({ items, className }: GridProps) => {

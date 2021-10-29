@@ -6,14 +6,15 @@ import Layout from './Layout';
 import { filterQuery, useSearchMeta } from '@lib/search';
 import { InferGetStaticPropsType } from 'next';
 import { getStaticProps } from '@pages/search';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import ProductCard from './ProductCard';
-import { Product } from '@generated/types';
+import { SearchProductsQuery } from '@generated/types';
 import SearchSidebar from './SearchSidebar';
 import SearchSort from './SearchSort';
 import Skeleton from './Skeleton';
 import rangeMap from '@lib/range-map';
+import { getServerPageSearchProducts } from '@generated/pages';
 
 const Search = ({
   products,
@@ -22,6 +23,9 @@ const Search = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [activeFilter, setActiveFilter] = useState('');
   const [toggleFilter, setToggleFilter] = useState(false);
+  const [searchProducts, setSearchProducts] = useState<SearchProductsQuery['products'] | null>(
+    null
+  );
 
   const router = useRouter();
   const { asPath, locale } = router;
@@ -35,6 +39,28 @@ const Search = ({
   const activeCategory = categories.find((c) => c.title.toLowerCase() === category);
   const activeBrand = brands.find((b) => b.title.toLowerCase() === brand);
 
+  useEffect(() => {
+    q
+      ? (async () => {
+          setSearchProducts(null);
+          const {
+            props: { data },
+          } = await getServerPageSearchProducts({
+            variables: {
+              filter: {
+                title: {
+                  contains: q ? q.toString() : '',
+                },
+              },
+            },
+          });
+          setSearchProducts(data.products);
+        })()
+      : pathname === '/search'
+      ? setSearchProducts(products)
+      : null;
+  }, [pathname, products, q]);
+
   const handleClick = (e: any, filter: string) => {
     if (filter !== activeFilter) {
       setToggleFilter(true);
@@ -43,7 +69,6 @@ const Search = ({
     }
     setActiveFilter(filter);
   };
-  const data: any = undefined;
 
   return (
     <div className="container flex flex-col items-center justify-between px-4 py-8 mx-auto">
@@ -64,15 +89,15 @@ const Search = ({
         <div className="lg:order-none order-3 col-span-8">
           {(q || activeCategory || activeBrand) && (
             <div className="mt-4 mb-8 text-lg transition duration-75 ease-in">
-              {data ? (
+              {searchProducts ? (
                 <>
                   <span
-                    className={clsx('animate-pulse', {
-                      fadeIn: data.found,
-                      hidden: !data.found,
+                    className={clsx({
+                      fadeIn: searchProducts,
+                      hidden: !searchProducts,
                     })}
                   >
-                    Showing {data?.products?.length} results{' '}
+                    Showing {searchProducts?.length} results{' '}
                     {q && (
                       <>
                         for "<strong>{q}</strong>"
@@ -81,8 +106,8 @@ const Search = ({
                   </span>
                   <span
                     className={clsx('animate-pulse', {
-                      fadeIn: !data.found,
-                      hidden: data.found,
+                      fadeIn: !searchProducts,
+                      hidden: searchProducts,
                     })}
                   >
                     {q ? (
@@ -103,21 +128,20 @@ const Search = ({
               )}
             </div>
           )}
-          {data && data.products ? (
-            <div className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
-              {data &&
-                data.products?.map((product: Product) => (
-                  <ProductCard
-                    key={product.id}
-                    className="animate-pulse fadeIn"
-                    product={product}
-                    imgProps={{
-                      width: 480,
-                      height: 480,
-                    }}
-                  />
-                ))}
-            </div>
+          {searchProducts ? (
+            <ul className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
+              {searchProducts!.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  className="fadeIn"
+                  product={product}
+                  imgProps={{
+                    width: 480,
+                    height: 480,
+                  }}
+                />
+              ))}
+            </ul>
           ) : (
             <div className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
               {rangeMap(12, (i) => (

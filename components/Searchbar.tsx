@@ -79,7 +79,6 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
           id={id}
           type="search"
           placeholder="Search for products..."
-          defaultValue={router.query.q}
           value={searchValue}
           onKeyUp={handleKeyUp}
           onChange={handleInputChange}
