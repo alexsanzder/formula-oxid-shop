@@ -1,6 +1,6 @@
 #import ../fragments/productBaseFragment.graphql
-query GetProduct($id: ID!) {
-  product(productId: $id) {
+query GetProduct($slug: String!) {
+  product(slug: $slug) {
     ...ProductBaseFragment
     imageGallery {
       images {

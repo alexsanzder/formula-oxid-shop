@@ -17,7 +17,7 @@ const links = [
 const Footer = ({ pages, brands }: FooterProps) => {
   const sitePages = pages ? pages.filter((page) => page.folder === 'CMSFOLDER_USERINFO') : [];
   return (
-    <footer className="text-gray-50 transition-colors duration-150 bg-gray-900 border-t border-gray-100">
+    <footer className="text-gray-50 dark:border-gray-600 transition-colors duration-150 bg-black border-t border-gray-100">
       <div className="lg:grid-cols-4 container grid grid-cols-1 gap-8 py-12 mx-auto">
         <div className="col-span-1">
           <Link href="/">

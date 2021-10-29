@@ -3,6 +3,7 @@ fragment ProductBaseFragment on Product {
   active
   title
   seo {
+    slug
     url
   }
   price {

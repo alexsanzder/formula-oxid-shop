@@ -11,12 +11,11 @@ interface ListItemProps {
 const placeholderImg = '/product-img-placeholder.svg';
 
 const ProductCard = ({ className, product, imgProps }: ListItemProps) => {
-  const { id, seo, title, imageGallery, price } = product;
-  const url = new URL(seo?.url ? seo.url : '/');
-  const slug = url.pathname.replace(/\.[^/.]+$/, '');
+  const { seo, title, imageGallery, price } = product;
+
   return (
     <li className={className}>
-      <Link href="/product/[id]" as={`/product/${id}`}>
+      <Link href="/product/[slug]" as={`/product/${seo.slug}`}>
         <a className="hover:cursor-pointer hover:shadow hover:border-gray-300 hover:bg-gray-50 flex flex-col justify-start w-full p-4 mt-4 space-y-4 border border-transparent rounded-sm">
           <div className="relative w-full bg-white">
             {imageGallery && (

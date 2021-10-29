@@ -7,7 +7,7 @@ class Document extends NextDocument<Props> {
     return (
       <Html>
         <Head />
-        <body className="loading dark:bg-gray-900 dark:text-white text-gray-900 bg-white">
+        <body className="loading dark:bg-black dark:text-white text-gray-900 bg-white">
           <Main />
           <div id="portal" />
           <NextScript />

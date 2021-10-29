@@ -40,14 +40,14 @@ const Header = ({ categories }: HeaderProps) => {
     <>
       <div
         className={clsx(
-          'dark:bg-gray-600 dark:text-gray-200 bg-gray-200 text-gray-700 py-2 text-center text-xs'
+          'dark:bg-gray-900 dark:text-gray-200 bg-gray-200 text-gray-900 py-3 text-center text-xs'
         )}
       >
         <span className="mr-2">
-          <strong>Formula</strong> = React + GraphQL OXID Shop.
+          <strong>Formula</strong> = React + GraphQL OXID Shop
         </span>
         <a
-          className="px-4 py-0.5 text-white hover:bg-gray-400 border hover:text-gray-800 hover:border-gray-600 bg-black dark:bg-transparent  dark:hover:text-gray-600  dark:hover:bg-gray-200 border-black rounded-full"
+          className="hover:text-gray-300 bg-gradient-to-r from-purple-600 to-blue-600 dark:hover:bg-gradient-to-l hover:shadow-md px-4 py-0.5 text-white rounded-full"
           href="https://github.com/alexsanzder/formula-oxid-shop"
         >
           Learn more
@@ -55,17 +55,14 @@ const Header = ({ categories }: HeaderProps) => {
       </div>
       <header
         className={clsx(
-          'transition ease-in-out sticky top-0 dark:bg-gray-900 z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300',
+          'transition ease-in-out sticky top-0 dark:bg-black z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300',
           isScrolled && 'shadow-xl'
         )}
       >
         <div className="dark:border-gray-600 w-full border-b border-gray-300">
           <div className="container flex items-center py-4 mx-auto text-sm">
             <Link href="/">
-              <a className="text-2xl font-semibold tracking-tight">
-                OXID <span className="text-red-600">e</span>
-                Shop
-              </a>
+              <a className="text-2xl font-semibold tracking-tight">Formula</a>
             </Link>
             <Searchbar />
             <div className="dark:text-gray-100 flex items-center space-x-4 text-xs text-gray-600">

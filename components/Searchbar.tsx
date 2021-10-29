@@ -65,14 +65,16 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
   };
 
   return (
-    <div className="flex-1 px-8 rounded-full">
-      <div className="relative flex items-center rounded-full">
+    <div className="flex-1 px-8">
+      <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl relative flex items-center p-px">
         <label className="hidden" htmlFor={id}>
           Search
         </label>
         <input
           className={clsx(
-            'dark:bg-black dark:text-gray-100 dark:focus:ring-gray-100 dark:border-gray-600 focus:ring-gray-600 focus:outline-none focus:ring-1 focus:ring-opacity-90 focus:border-transparent focus:bg-white border-gray-200 bg-opacity-60 rounded-3xl w-full px-5 py-2.5 text-sm text-gray-800 bg-gray-100 border'
+            'rounded-3xl w-full px-5 py-2.5 text-sm text-gray-900 bg-gray-100 border-1 border-transparent ring-1 ring-gray-300',
+            'dark:bg-black dark:text-gray-100 dark:ring-gray-600',
+            'focus:ring-transparent focus:outline-none'
           )}
           id={id}
           type="search"

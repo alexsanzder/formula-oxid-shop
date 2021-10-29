@@ -2,7 +2,7 @@
 #import ../../fragments/contentBaseFragment.graphql
 #import ../../fragments/productBaseFragment.graphql
 
-query GetProductSite($id: ID!) {
+query GetProductSite($slug: String!) {
   rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
     ...CategoryBaseFragment
     children {
@@ -21,7 +21,7 @@ query GetProductSite($id: ID!) {
     }
   }
 
-  product(productId: $id) {
+  product(slug: $slug) {
     ...ProductBaseFragment
     imageGallery {
       images {

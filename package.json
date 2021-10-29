@@ -21,7 +21,7 @@
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "clsx": "^1.1.1",
     "graphql": "^15.6.1",
-    "next": "latest",
+    "next": "^11.1.2",
     "next-seo": "^4.28.1",
     "next-themes": "^0.0.15",
     "react": "^17.0.2",

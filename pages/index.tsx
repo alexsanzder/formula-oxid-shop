@@ -67,7 +67,7 @@ const Home = ({
       </Slider>
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto mt-12">
         <h2
-          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
             __html: bargain.title,
           }}
@@ -77,7 +77,7 @@ const Home = ({
 
       <div className="dark:bg-gray-800 mb-6 bg-gray-100">
         <div className="container flex flex-col items-center justify-between w-full px-4 py-12 mx-auto">
-          <h2 className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300">
+          <h2 className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize">
             Our brands
           </h2>
         </div>
@@ -105,7 +105,7 @@ const Home = ({
 
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
         <h2
-          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
             __html: newest.title,
           }}
@@ -114,7 +114,7 @@ const Home = ({
       </div>
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
         <h2
-          className="dark:text-gray-100 px-4 py-2 text-2xl font-semibold text-gray-700 capitalize border-b-2 border-gray-300"
+          className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
             __html: top.title,
           }}

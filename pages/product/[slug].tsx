@@ -9,14 +9,14 @@ import Layout from '@components/Layout';
 import ProductView from '@components/ProductView';
 import { ssrGetProducts, ssrGetProductSite } from '@generated/pages';
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext<{ id: string }>) => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext<{ slug: string }>) => {
   const {
     props: { data, error },
   } = await ssrGetProductSite.getServerPage({
-    variables: { id: params!.id },
+    variables: { slug: params!.slug },
   });
   if (error) {
-    throw new Error(`Product with id '${params!.id}' not found`);
+    throw new Error(`Product with id '${params!.slug}' not found`);
   }
 
   return {
@@ -34,13 +34,13 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }: GetStaticPaths
 
   const paths = locales
     ? locales.reduce<string[]>((arr, locale) => {
-        // Add a product path for every locale
+        // TODO Add a product path for every locale
         products.forEach((product) => {
-          arr.push(`/${locale}/product/${product.id}`);
+          arr.push(`/${locale}/product/${product.seo.slug}`);
         });
         return arr;
       }, [])
-    : products.map((product) => `/product/${product.id}`);
+    : products.map((product) => `/product/${product.seo.slug}`);
 
   return {
     paths,
