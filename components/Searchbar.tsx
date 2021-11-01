@@ -9,7 +9,7 @@ interface SearchProps {
 
 const Searchbar = ({ id = 'search' }: SearchProps) => {
   const router = useRouter();
-  const [searchValue, setSearchValue] = useState<string | string[] | undefined>(router.query.q);
+  const [searchValue, setSearchValue] = useState<string | string[] | undefined>('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -66,15 +66,15 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
 
   return (
     <div className="flex-1 px-8">
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl relative flex items-center p-px">
+      <span className="bg-gradient-to-r from-purple-600 to-blue-600 relative flex items-center p-0.5  rounded-full">
         <label className="hidden" htmlFor={id}>
           Search
         </label>
         <input
           className={clsx(
-            'rounded-3xl w-full px-5 py-2.5 text-sm text-gray-900 bg-gray-100 border-1 border-transparent ring-1 ring-gray-300',
+            'rounded-full w-full px-5 py-2.5 text-sm text-gray-900 bg-gray-100 ring-2 ring-gray-100',
             'dark:bg-black dark:text-gray-100 dark:ring-gray-600',
-            'focus:ring-transparent focus:outline-none'
+            'focus:ring-transparent focus:outline-none dark:focus:ring-transparent'
           )}
           id={id}
           type="search"
@@ -129,7 +129,7 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
             </svg>
           </button>
         )}
-      </div>
+      </span>
     </div>
   );
 };

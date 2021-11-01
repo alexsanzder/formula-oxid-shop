@@ -40,7 +40,7 @@ const Search = ({
   const activeBrand = brands.find((b) => b.title.toLowerCase() === brand);
 
   useEffect(() => {
-    q
+    typeof q === 'string'
       ? (async () => {
           setSearchProducts(null);
           const {
@@ -49,7 +49,7 @@ const Search = ({
             variables: {
               filter: {
                 title: {
-                  contains: q ? q.toString() : '',
+                  contains: q,
                 },
               },
             },
