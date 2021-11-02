@@ -23,6 +23,7 @@ query GetProductSite($slug: String!) {
 
   product(slug: $slug) {
     ...ProductBaseFragment
+    longDescription
     imageGallery {
       images {
         image

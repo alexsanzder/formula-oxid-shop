@@ -66,15 +66,15 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
 
   return (
     <div className="flex-1 px-8">
-      <span className="bg-gradient-to-r from-purple-600 to-blue-600 relative flex items-center p-0.5  rounded-full">
+      <span className="bg-gradient-to-r from-purple-600 to-blue-600 flex items-center relative p-0.5 rounded-full">
         <label className="hidden" htmlFor={id}>
           Search
         </label>
         <input
           className={clsx(
-            'rounded-full w-full px-5 py-2.5 text-sm text-gray-900 bg-gray-100 ring-2 ring-gray-100',
-            'dark:bg-black dark:text-gray-100 dark:ring-gray-600',
-            'focus:ring-transparent focus:outline-none dark:focus:ring-transparent'
+            'rounded-full w-full px-5 mx-auto py-2 text-sm text-gray-900 bg-gray-100 ring-2 ring-gray-100 ring-offset-2 ring-offset-gray-100',
+            'dark:bg-black dark:text-gray-100 dark:ring-gray-700 dark:ring-offset-0',
+            'focus:ring-transparent focus:outline-none dark:focus:ring-transparent focus:ring-offset-transparent'
           )}
           id={id}
           type="search"

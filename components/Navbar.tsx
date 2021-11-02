@@ -15,7 +15,7 @@ const Navbar = ({ categories }: NavbarProps) => {
           <Link href={`/search/${category.title.toLowerCase()}`} passHref>
             <a
               className={clsx(
-                'inline-block mr-8 py-3 text-gray-700 transition border-b-2 border-transparent',
+                'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
                 'dark:text-gray-200 dark:bg-transparent ',
                 'group-hover:border-gray-900 dark:group-hover:border-gray-50'
               )}

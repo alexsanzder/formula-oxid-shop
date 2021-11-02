@@ -13,6 +13,8 @@ const ProductView = ({ product }: GetProductQuery) => {
     color: '',
   });
 
+  const [active, setActive] = useState(0);
+
   useEffect(() => {
     product?.variants.length ??
       setState({
@@ -50,38 +52,78 @@ const ProductView = ({ product }: GetProductQuery) => {
   );
   return (
     <>
-      <div className="container flex-col items-start py-8 mx-auto">
-        <div className="justify-items-end inline-grid w-full grid-cols-2">
-          <div className="flex justify-center px-4">
-            <div className="relative flex flex-col items-start justify-start mr-4">
-              {product.imageGallery.images.map((image: any, idx: number) => (
-                <div
-                  key={image.icon.substr(image.icon.length - 16)}
-                  className={clsx('w-18 h-18 mb-4', idx !== 0 && 'opacity-50')}
-                >
-                  <Image
-                    src={image.icon}
-                    alt={image.icon || 'Product Image'}
-                    width={100}
-                    height={100}
-                    layout="fixed"
-                    objectFit="contain"
-                    blurDataURL={image.icon}
-                  />
-                </div>
-              ))}
+      <article className="container flex-col items-start py-4 mx-auto">
+        <div className="justify-items-start inline-grid w-full grid-cols-3 py-8 border-b border-gray-300">
+          <div className="w-full col-span-2 pr-8">
+            <div className="flex justify-start px-4">
+              <div className="relative flex flex-col items-start justify-start mr-4">
+                {product.imageGallery.images.map((image: any, idx: number) => (
+                  <div
+                    key={image.icon.substr(image.icon.length - 16)}
+                    className={clsx('w-18 h-18 mb-4', idx !== 0 && 'opacity-50')}
+                  >
+                    <Image
+                      src={image.icon}
+                      alt={image.icon || 'Product Image'}
+                      width={100}
+                      height={100}
+                      layout="fixed"
+                      objectFit="contain"
+                      blurDataURL={image.icon}
+                    />
+                  </div>
+                ))}
+              </div>
+              <Image
+                src={product.imageGallery.images[0].image}
+                alt={product.title || 'Product Image'}
+                width={600}
+                height={600}
+                layout="fixed"
+                objectFit="contain"
+                blurDataURL={product.imageGallery.images[0].image}
+              />
             </div>
-            <Image
-              src={product.imageGallery.images[0].image}
-              alt={product.title || 'Product Image'}
-              width={600}
-              height={600}
-              layout="fixed"
-              objectFit="contain"
-              blurDataURL={product.imageGallery.images[0].image}
-            />
+            <div className="dark:border-gray-600 flex w-full mt-6 overflow-x-scroll text-sm text-gray-900 border-b border-gray-300">
+              <button
+                className={clsx(
+                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'dark:text-gray-200 dark:bg-transparent ',
+                  'hover:border-gray-900 dark:hover:border-gray-50',
+                  active === 0 ? 'border-gray-900 dark:border-gray-50' : ''
+                )}
+              >
+                Details
+              </button>
+              <button
+                className={clsx(
+                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'dark:text-gray-200 dark:bg-transparent ',
+                  'hover:border-gray-900 dark:hover:border-gray-50',
+                  active === 1 ? 'border-gray-50 dark:border-gray-900' : ''
+                )}
+              >
+                Reviews
+              </button>
+              <button
+                className={clsx(
+                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'dark:text-gray-200 dark:bg-transparent ',
+                  'hover:border-gray-900 dark:hover:border-gray-50',
+                  active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+                )}
+              >
+                Related
+              </button>
+            </div>
+            <div
+              className="prose-purple w-full prose"
+              dangerouslySetInnerHTML={{
+                __html: product.longDescription ?? '',
+              }}
+            ></div>
           </div>
-          <aside className="">
+          <aside>
             <div className="w-96 flex flex-col px-6">
               <p className="py-2 text-xs text-gray-600">
                 {product.categories[0].parent && product.categories[0].parent.parent
@@ -214,11 +256,11 @@ const ProductView = ({ product }: GetProductQuery) => {
           </aside>
         </div>
 
-        <div className="w-full py-8">
-          <h2 className="text-xl font-semibold text-gray-700 capitalize">Related Products</h2>
+        <div className=" w-full py-8 mt-6">
+          <h2 className="text-xl font-semibold text-black capitalize">Related Products</h2>
           <GridView items={product.crossSelling} />
         </div>
-      </div>
+      </article>
       <NextSeo
         title={product.title}
         description={product.shortDescription}

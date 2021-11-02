@@ -2,6 +2,7 @@
 query GetProduct($slug: String!) {
   product(slug: $slug) {
     ...ProductBaseFragment
+    longDescription
     imageGallery {
       images {
         image
