@@ -18,7 +18,7 @@ const ProductCard = ({ className, product, imgProps }: ListItemProps) => {
   return (
     <li className={className}>
       <Link href="/product/[slug]" as={`/product/${seo.slug}`}>
-        <a className="group hover:cursor-pointer hover:shadow-xl dark:hover:bg-black hover:bg-white h-[450px] relative flex flex-col justify-between w-full p-4 space-y-4 border border-gray-200 rounded">
+        <a className="group hover:cursor-pointer hover:shadow-xl dark:hover:bg-black hover:bg-white h-[480px] relative flex flex-col justify-between w-full p-4 space-y-4 border border-gray-200 rounded">
           <button className="group-hover:shadow-lg right-3 absolute z-30 p-4 bg-white rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
