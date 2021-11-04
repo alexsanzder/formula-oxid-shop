@@ -11,6 +11,8 @@ import { Grid, StarRating } from '@components/ui';
 import { GetProductQuery } from '@generated/types';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
+import ProductPrice from '../ProductPrice';
+
 const ProductView = ({ product }: GetProductQuery) => {
   const [state, setState] = useState({
     size: '',
@@ -50,7 +52,7 @@ const ProductView = ({ product }: GetProductQuery) => {
   const { shopState, setShopState } = useShop();
   useScrollPosition(
     ({ currPos }) => {
-      console.log('pos', currPos.y);
+      // console.log('pos', currPos.y);
       setIsShadowed(currPos.y >= 420);
       setIsSticky(currPos.y >= 830);
       setShopState({ ...shopState, isSticky: currPos.y <= 540 });
@@ -118,7 +120,7 @@ const ProductView = ({ product }: GetProductQuery) => {
                   __html: product.title,
                 }}
               />
-              <span className="text-xs leading-4 text-gray-600">{`${product.price.price.toFixed(
+              <span className="dark:text-gray-300 text-xs leading-4 text-gray-600">{`${product.price.price.toFixed(
                 2
               )} ${product.price.currency.sign}`}</span>
             </div>
@@ -146,10 +148,10 @@ const ProductView = ({ product }: GetProductQuery) => {
           </div>
         </div>
       </div>
-      <article className="container flex-col items-start py-4 mx-auto space-y-4">
+      <article className="container flex-col items-start pt-4 pb-8 mx-auto space-y-4">
         <div
           ref={scrollRef}
-          className="justify-items-end inline-grid w-full grid-cols-3 py-8 border-b border-gray-300"
+          className="justify-items-end dark:border-gray-700 inline-grid w-full grid-cols-3 py-8 border-b border-gray-300"
         >
           <div className=" w-full col-span-2">
             <div className="flex justify-start">
@@ -214,7 +216,7 @@ const ProductView = ({ product }: GetProductQuery) => {
               </button>
             </div>
             <div
-              className="prose-purple w-full py-8 prose"
+              className="prose-purple dark:prose-dark w-full prose"
               dangerouslySetInnerHTML={{
                 __html: product.longDescription ?? '',
               }}
@@ -233,7 +235,7 @@ const ProductView = ({ product }: GetProductQuery) => {
                   }}
                 ></span>
               </p>
-              <div className="py-2 border-b border-gray-200">
+              <div className="dark:border-gray-600 py-2 border-b border-gray-200">
                 <h2
                   className="text-2xl font-bold"
                   dangerouslySetInnerHTML={{
@@ -250,19 +252,11 @@ const ProductView = ({ product }: GetProductQuery) => {
             </div>
             <div
               className={clsx(
-                'flex flex-col w-96 p-6 sticky mt-3 rounded-sm top-32',
-                isShadowed && 'shadow-2xl'
+                'flex flex-col w-96 p-6 sticky mt-3 rounded-sm top-32 border border-transparent',
+                isShadowed && 'shadow-2xl dark:border-gray-700'
               )}
             >
-              <div className="flex items-start py-1 space-x-1">
-                <div className="flex items-start justify-start text-sm">
-                  <span className="text-2xl font-semibold">{Math.trunc(product.price.price)}</span>
-                  <span className="text-gray-800">
-                    {`.${(product.price.price.toFixed(2) + '').split('.')[1]}`}
-                  </span>
-                </div>
-                <span className="text-sm text-gray-600">{product.price.currency.sign}</span>
-              </div>
+              <ProductPrice price={product.price} />
 
               {product.variants && product.variantLabels
                 ? product.variantLabels.map((label: string, idx: any) => (
@@ -336,16 +330,16 @@ const ProductView = ({ product }: GetProductQuery) => {
                   ))
                 : null}
               <div className="flex w-full pt-6 space-x-2">
-                <div className="rounded-3 flex justify-around w-20 py-4 text-sm border border-gray-300">
+                <div className="rounded-3 flex justify-around w-20 py-4 text-sm border border-gray-300 rounded-sm">
                   <div className="text-gray-300" role="button" tabIndex={0}>
                     -
                   </div>
                   1
-                  <div className="text-black" role="button" tabIndex={0}>
+                  <div className="dark:text-white text-black" role="button" tabIndex={0}>
                     +
                   </div>
                 </div>
-                <button className="rounded-3 flex-1 py-4 text-sm font-light text-white bg-black rounded-sm">
+                <button className="rounded-3 dark:bg-white dark:text-black flex-1 py-4 text-sm font-medium text-white bg-black rounded-sm">
                   Add to cart
                 </button>
               </div>
@@ -353,32 +347,44 @@ const ProductView = ({ product }: GetProductQuery) => {
           </aside>
         </div>
         <div className="flex flex-col space-y-4">
-          <div className="container w-full py-6 mx-auto">
+          <div className="container w-full py-8 mx-auto">
             <h2 className="text-xl font-semibold text-black capitalize">Reviews</h2>
-            {product?.reviews?.map((review) => (
-              <div key={review.id} className="flex items-center py-4">
-                <div className="w-14 h-14 flex items-center justify-center text-lg text-center text-white capitalize bg-gray-400 rounded-full">
-                  {review.reviewer?.firstName.charAt(0)}
+            {product.reviews.length ? (
+              product?.reviews?.map((review) => (
+                <div key={review.id} className="flex items-center py-4">
+                  <div className="w-14 h-14 flex items-center justify-center text-lg text-center text-white capitalize bg-gray-400 rounded-full">
+                    {review.reviewer?.firstName.charAt(0)}
+                  </div>
+                  <div className="flex flex-col ml-3">
+                    <p className="flex items-start space-x-1 text-sm font-medium">
+                      <StarRating count={review.rating}></StarRating>
+                      <span>{`(${review.rating}/5)`}</span>
+                    </p>
+                    <i className="">{review.text}</i>
+                    <p className="text-xs text-gray-700">
+                      <span>{review.reviewer?.firstName}</span>
+                      <span className="px-1">&#8226;</span>
+                      <span>{format(new Date(review.createAt), 'eeee dd MMMM yyyy')}</span>
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col ml-3">
-                  <p className="flex items-start space-x-1 text-sm font-medium">
-                    <StarRating count={review.rating}></StarRating>
-                    <span>{`(${review.rating}/5)`}</span>
-                  </p>
-                  <i className="">{review.text}</i>
-                  <p className="text-xs text-gray-700">
-                    <span>{review.reviewer?.firstName}</span>
-                    <span className="px-1">&#8226;</span>
-                    <span>{format(new Date(review.createAt), 'eeee dd MMMM yyyy')}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <div className="py-3">There are no reviews yet.</div>
+            )}
           </div>
-          <div className="container w-full py-6 mx-auto">
-            <h2 className="py-2 text-xl font-semibold text-black capitalize">Related Products</h2>
-            <Grid className="py-4" items={product.crossSelling} />
-          </div>
+          {product.accessories ? (
+            <div className="container w-full py-8 mx-auto">
+              <h2 className="py-2 text-xl font-semibold text-black capitalize">Accessories</h2>
+              <Grid className="py-4" items={product.accessories} />
+            </div>
+          ) : null}
+          {product.crossSelling ? (
+            <div className="container w-full py-8 mx-auto">
+              <h2 className="py-2 text-xl font-semibold text-black capitalize">Related Products</h2>
+              <Grid className="py-4" items={product.crossSelling} />
+            </div>
+          ) : null}
         </div>
       </article>
 

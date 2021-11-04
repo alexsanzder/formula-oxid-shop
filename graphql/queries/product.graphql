@@ -36,6 +36,12 @@ query GetProduct($slug: String!) {
       createAt
       rating
     }
+    accessories {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
+    }
     crossSelling {
       ...ProductBaseFragment
       imageGallery {

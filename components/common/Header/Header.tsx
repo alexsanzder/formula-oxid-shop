@@ -62,12 +62,12 @@ const Header = ({ categories }: HeaderProps) => {
       </div>
       <header
         className={clsx(
-          'transition ease-in-out top-0 dark:bg-black z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300',
+          'transition ease-in-out top-0 dark:bg-black z-40 w-full bg-white border-b dark:border-gray-700 border-gray-300',
           isScrolled && 'shadow-xl',
           isSticky && 'sticky'
         )}
       >
-        <div className="dark:border-gray-600 w-full border-b border-gray-300">
+        <div className="dark:border-gray-700 w-full border-b border-gray-300">
           <div className="container flex items-center py-4 mx-auto text-sm">
             <Link href="/">
               <a className="text-2xl font-semibold tracking-tight">Formula</a>

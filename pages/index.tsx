@@ -71,7 +71,7 @@ const Home = ({
             )
         )}
       </Slider>
-      <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto mt-12">
+      <div className="container flex flex-col px-4 py-12 mx-auto mt-12">
         <h2
           className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
@@ -82,12 +82,7 @@ const Home = ({
       </div>
 
       <div className="dark:bg-gray-800 mb-6 bg-gray-100">
-        <div className="container flex flex-col items-center justify-between w-full px-4 pt-8 mx-auto">
-          <h2 className="dark:text-purple-500 px-4 text-2xl font-semibold text-gray-900 capitalize">
-            Our brands
-          </h2>
-        </div>
-        <Marquee gradient={false} className="py-6">
+        <Marquee gradient={false} className="py-12">
           {brands.map(
             (brand) =>
               brand.active && (
@@ -109,7 +104,7 @@ const Home = ({
         </Marquee>
       </div>
 
-      <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
+      <div className="container flex flex-col px-4 py-12 mx-auto">
         <h2
           className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
@@ -118,7 +113,7 @@ const Home = ({
         />
         <Grid className="py-4" items={newest.products} />
       </div>
-      <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
+      <div className="container flex flex-col px-4 py-12 mx-auto">
         <h2
           className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize"
           dangerouslySetInnerHTML={{
