@@ -6,8 +6,8 @@ import type {
 } from 'next';
 import { useRouter } from 'next/router';
 
-import Layout from '@components/Layout';
-import Text from '@components/Text';
+import { Layout } from '@components/common';
+import { Text } from '@components/ui';
 import { ssrGetContents, ssrGetSites } from '@generated/pages';
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext<{ pages: string[] }>) => {

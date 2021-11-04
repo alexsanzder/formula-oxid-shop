@@ -21,6 +21,7 @@
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@tailwindcss/typography": "^0.4.1",
     "clsx": "^1.1.1",
+    "date-fns": "^2.25.0",
     "graphql": "^15.6.1",
     "next": "^11.1.2",
     "next-seo": "^4.28.1",
@@ -46,10 +47,13 @@
     "@types/react": "^17.0.29",
     "@types/react-dom": "^17.0.9",
     "@types/react-slick": "^0.23.6",
+    "@typescript-eslint/parser": "^5.3.0",
     "autoprefixer": "^10.2.6",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
     "graphql-codegen-apollo-next-ssr": "^1.7.0",
     "husky": "^7.0.4",
     "postcss": "^8.3.5",
@@ -65,10 +69,6 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "eslint",
-      "prettier --write",
-      "git add"
-    ],
-    "**/*.{md,mdx,json}": [
       "prettier --write",
       "git add"
     ]

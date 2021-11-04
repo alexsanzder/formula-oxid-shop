@@ -1,20 +1,18 @@
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+import clsx from 'clsx';
+import { InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 
-import Layout from './Layout';
-
-import { filterQuery, useSearchMeta } from '@lib/search';
-import { InferGetStaticPropsType } from 'next';
-import { getStaticProps } from '@pages/search';
-import { useEffect, useState } from 'react';
-import clsx from 'clsx';
-import ProductCard from './ProductCard';
-import { SearchProductsQuery } from '@generated/types';
-import SearchSidebar from './SearchSidebar';
-import SearchSort from './SearchSort';
-import Skeleton from './Skeleton';
-import rangeMap from '@lib/range-map';
+import { Layout } from '@components/common';
+import { ProductCard } from '@components/product';
+import { SearchSidebar, SearchSort } from '@components/search';
+import { Skeleton } from '@components/ui';
 import { getServerPageSearchProducts } from '@generated/pages';
+import { SearchProductsQuery } from '@generated/types';
+import rangeMap from '@lib/range-map';
+import { filterQuery, useSearchMeta } from '@lib/search';
+import { getStaticProps } from '@pages/search';
 
 const Search = ({
   products,
@@ -71,8 +69,8 @@ const Search = ({
   };
 
   return (
-    <div className="container flex flex-col items-center justify-between px-4 py-8 mx-auto">
-      <div className="lg:grid-cols-12 grid grid-cols-1 gap-4 mt-3 mb-20">
+    <div className="container flex flex-col items-center justify-between py-8 mx-auto">
+      <div className="lg:grid-cols-6 grid grid-cols-1 gap-3 mt-3 mb-20">
         {/* Sidebar */}
         <SearchSidebar
           activeFilter={activeFilter}
@@ -86,7 +84,7 @@ const Search = ({
         />
 
         {/* Products */}
-        <div className="lg:order-none order-3 col-span-8">
+        <div className="lg:order-none order-3 col-span-4">
           {(q || activeCategory || activeBrand) && (
             <div className="mt-4 mb-8 text-lg transition duration-75 ease-in">
               {searchProducts ? (
@@ -129,7 +127,7 @@ const Search = ({
             </div>
           )}
           {searchProducts ? (
-            <ul className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
+            <ul className="sm:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-3">
               {searchProducts!.map((product) => (
                 <ProductCard
                   key={product.id}

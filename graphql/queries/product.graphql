@@ -27,6 +27,15 @@ query GetProduct($slug: String!) {
       }
       title
     }
+    reviews {
+      id
+      text
+      reviewer {
+        firstName
+      }
+      createAt
+      rating
+    }
     crossSelling {
       ...ProductBaseFragment
       imageGallery {

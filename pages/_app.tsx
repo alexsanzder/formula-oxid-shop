@@ -2,10 +2,13 @@ import '@assets/tailwind.css';
 import '@assets/chrome-bug.css';
 
 import { FC, useEffect } from 'react';
+
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
-import Head from '@components/Head';
+import ShopProvider from '@context/AppContext';
+
+import { Head } from '@components/common';
 
 const Noop: FC = ({ children }) => <>{children}</>;
 
@@ -20,9 +23,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head />
       <ThemeProvider attribute="class">
-        <Layout pageProps={pageProps}>
-          <Component {...pageProps} />
-        </Layout>
+        <ShopProvider>
+          <Layout pageProps={pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </ShopProvider>
       </ThemeProvider>
     </>
   );

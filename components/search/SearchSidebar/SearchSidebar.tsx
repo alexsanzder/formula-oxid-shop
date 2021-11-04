@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 import { GetSearchSiteQuery } from '@generated/graphql';
 
@@ -24,7 +24,7 @@ const SearchSidebar = ({
   query,
 }: SearchSidebarProps) => {
   return (
-    <div className="lg:col-span-2 lg:order-none order-1 col-span-8">
+    <div className="lg:col-span-1 lg:order-none order-1 col-span-4">
       {/* Categories */}
       <div className="relative inline-block w-full">
         <div className="lg:hidden">

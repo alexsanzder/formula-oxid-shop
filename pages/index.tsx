@@ -2,15 +2,17 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 const placeholderImg = '/product-img-placeholder.svg';
 
+import { useEffect } from 'react';
+
 import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 
-import Layout from '@components/Layout';
-import GridView from '@components/GridView';
-import Marquee from '@components/Marquee';
+import { useShop } from '@context/AppContext';
 
+import { Layout } from '@components/common';
+import { Grid, Marquee } from '@components/ui';
 import { ssrGetHomeSite } from '@generated/pages';
 
 export const getStaticProps = async () => {
@@ -22,7 +24,7 @@ export const getStaticProps = async () => {
   }
 
   return {
-    props: data,
+    props: { ...data, isSticky: true },
     revalidate: 60,
   };
 };
@@ -34,6 +36,11 @@ const Home = ({
   newest,
   top,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { shopState, setShopState } = useShop();
+  useEffect(() => {
+    setShopState({ ...shopState, isSticky: true });
+  }, [setShopState, shopState]);
+
   var sliderSettings = {
     dots: true,
     infinite: true,
@@ -48,15 +55,14 @@ const Home = ({
         {banners.map(
           (banner) =>
             banner.active && (
-              <div key={banner.id} className="h-[600px] w-full overflow-y-hidden relative">
+              <div key={banner.id} className="h-[740px] w-full overflow-y-hidden relative">
                 <Image
                   key={banner.id}
-                  className="h-[600px]"
                   alt={banner.title}
                   src={banner.picture}
                   layout="responsive"
                   width={1200}
-                  height={600}
+                  height={740}
                   objectFit="cover"
                   placeholder="blur"
                   blurDataURL={banner.picture}
@@ -72,16 +78,16 @@ const Home = ({
             __html: bargain.title,
           }}
         />
-        <GridView className="py-2" items={bargain.products} />
+        <Grid className="py-4" items={bargain.products} />
       </div>
 
       <div className="dark:bg-gray-800 mb-6 bg-gray-100">
-        <div className="container flex flex-col items-center justify-between w-full px-4 py-12 mx-auto">
-          <h2 className="dark:text-purple-500 px-4 py-2 text-2xl font-semibold text-gray-900 capitalize">
+        <div className="container flex flex-col items-center justify-between w-full px-4 pt-8 mx-auto">
+          <h2 className="dark:text-purple-500 px-4 text-2xl font-semibold text-gray-900 capitalize">
             Our brands
           </h2>
         </div>
-        <Marquee gradient={false} className="py-4">
+        <Marquee gradient={false} className="py-6">
           {brands.map(
             (brand) =>
               brand.active && (
@@ -110,7 +116,7 @@ const Home = ({
             __html: newest.title,
           }}
         />
-        <GridView className="py-2" items={newest.products} />
+        <Grid className="py-4" items={newest.products} />
       </div>
       <div className="container flex flex-col items-center justify-between px-4 py-12 mx-auto">
         <h2
@@ -119,7 +125,7 @@ const Home = ({
             __html: top.title,
           }}
         />
-        <GridView className="py-2" items={top.products} />
+        <Grid className="py-4" items={top.products} />
       </div>
     </div>
   );

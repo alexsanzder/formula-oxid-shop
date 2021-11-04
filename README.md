@@ -1,7 +1,8 @@
 [<img align="right" src="https://github.com/alexsanzder/formula-oxid-storefront/blob/main/public/favicon.svg?sanitize=true" width="30%">]()
+
 # Formula = React + GraphQL OXID Storefront
 
-This is __FORMULA__ a [React](https://reactjs.org) + [GraphQL](https://github.com/OXID-eSales/graphql-storefront-module) + [OXID eSales](https://oxid-esales.com) __Storefront__, built with [NextJS](https://www.nextjs.org), [TypeScript](https://www.typescriptlang.org/) and completely styled with [Tailwind CSS](https://tailwindcss.com/).
+This is **FORMULA** a [React](https://reactjs.org) + [GraphQL](https://github.com/OXID-eSales/graphql-storefront-module) + [OXID eSales](https://oxid-esales.com) **Storefront**, built with [NextJS](https://www.nextjs.org), [TypeScript](https://www.typescriptlang.org/) and completely styled with [Tailwind CSS](https://tailwindcss.com/).
 
 This is an all-in-one starter kit for OXID eSales frontend shops.
 
@@ -18,7 +19,6 @@ This is an all-in-one starter kit for OXID eSales frontend shops.
 - [Cypress](https://www.cypress.io)
 - [ESLint](https://eslint.org)
 - [Prettier](https://prettier.io)
-
 
 ## Features
 
@@ -56,7 +56,7 @@ Formula integrates it out-of-the-box with an OXID eShop GraphQL endpoint, it ass
    yarn install
    ```
 
-5. Serve with hot reload at http://localhost:3000.
+4. Serve with hot reload at http://localhost:3000.
    ```bash
    yarn dev
    ```
@@ -72,16 +72,18 @@ Formula integrates it out-of-the-box with an OXID eShop GraphQL endpoint, it ass
 ```bash
 yarn build
 ```
+
 ### Start command
-   ```bash
-   yarn start
-   ```
+
+```bash
+yarn start
+```
 
 #### Lint command
 
-  ```bash
- yarn lint
-  ```
+```bash
+yarn lint
+```
 
 #### Test commands
 

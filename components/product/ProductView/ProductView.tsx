@@ -1,10 +1,14 @@
+import { useEffect, useRef, useState } from 'react';
+
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 
+import { useShop } from '@context/AppContext';
+
+import { Grid, StarRating } from '@components/ui';
 import { GetProductQuery } from '@generated/types';
-import { NextSeo } from 'next-seo';
-import GridView from './GridView';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 const ProductView = ({ product }: GetProductQuery) => {
@@ -14,6 +18,10 @@ const ProductView = ({ product }: GetProductQuery) => {
   });
 
   const [active, setActive] = useState(0);
+  const [isSticky, setIsSticky] = useState(false);
+  const [isShadowed, setIsShadowed] = useState(false);
+  const [isShowed, setIsShowed] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     product?.variants.length ??
@@ -39,11 +47,17 @@ const ProductView = ({ product }: GetProductQuery) => {
       : [];
   };
 
-  const [isSticky, setIsSticky] = useState(false);
-  const [isShadowed, setIsShadowed] = useState(false);
+  const { shopState, setShopState } = useShop();
   useScrollPosition(
     ({ currPos }) => {
-      setIsShadowed(currPos.y >= 288);
+      console.log('pos', currPos.y);
+      setIsShadowed(currPos.y >= 420);
+      setIsSticky(currPos.y >= 830);
+      setShopState({ ...shopState, isSticky: currPos.y <= 540 });
+
+      if (null !== scrollRef.current) {
+        setIsShowed(currPos.y >= scrollRef.current.clientHeight + 100);
+      }
     },
     [isSticky, isShadowed],
     undefined,
@@ -52,10 +66,93 @@ const ProductView = ({ product }: GetProductQuery) => {
   );
   return (
     <>
-      <article className="container flex-col items-start py-4 mx-auto">
-        <div className="justify-items-start inline-grid w-full grid-cols-3 py-8 border-b border-gray-300">
-          <div className="w-full col-span-2 pr-8">
-            <div className="flex justify-start px-4">
+      <div
+        className={clsx(
+          'dark:bg-black dark:border-gray-600 fixed top-0 z-50 w-full bg-white border-b border-gray-300 shadow-lg',
+          isSticky ? 'inline-block' : 'hidden'
+        )}
+      >
+        <div className=" container flex items-center justify-between mx-auto text-sm">
+          <div className="flex overflow-x-scroll text-sm text-gray-900">
+            <button
+              className={clsx(
+                'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
+                'dark:text-gray-200 dark:bg-transparent ',
+                'hover:border-gray-900 dark:hover:border-gray-50',
+                active === 0 ? 'border-gray-900 dark:border-gray-50' : ''
+              )}
+            >
+              Details
+            </button>
+            <button
+              className={clsx(
+                'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
+                'dark:text-gray-200 dark:bg-transparent ',
+                'hover:border-gray-900 dark:hover:border-gray-50',
+                active === 1 ? 'border-gray-50 dark:border-gray-900' : ''
+              )}
+            >
+              Reviews
+            </button>
+            <button
+              className={clsx(
+                'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
+                'dark:text-gray-200 dark:bg-transparent ',
+                'hover:border-gray-900 dark:hover:border-gray-50',
+                active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+              )}
+            >
+              Related
+            </button>
+          </div>
+          <div
+            className={clsx(
+              'flex items-center justify-between',
+              isShowed ? 'inline-block' : 'hidden'
+            )}
+          >
+            <div className="flex flex-col items-end">
+              <h3
+                className="text-sm font-medium leading-4"
+                dangerouslySetInnerHTML={{
+                  __html: product.title,
+                }}
+              />
+              <span className="text-xs leading-4 text-gray-600">{`${product.price.price.toFixed(
+                2
+              )} ${product.price.currency.sign}`}</span>
+            </div>
+
+            <div className="max-h-10 px-2">
+              <Image
+                src={product.imageGallery.images[0].image}
+                alt={product.title || 'Product Image'}
+                width={40}
+                height={40}
+                layout="fixed"
+                objectFit="contain"
+                blurDataURL={product.imageGallery.images[0].image}
+              />
+            </div>
+            <button
+              className={clsx(
+                'bg-black flex items-center px-10 py-2.5 space-x-1 text-white rounded-sm',
+                'dark:bg-transparent dark:hover:text-gray-400 dark:text-gray-50',
+                'hover:border-gray-600 hover:text-gray-600 hover:bg-gray-100'
+              )}
+            >
+              <span className="capitalize">Add to cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <article className="container flex-col items-start py-4 mx-auto space-y-4">
+        <div
+          ref={scrollRef}
+          className="justify-items-end inline-grid w-full grid-cols-3 py-8 border-b border-gray-300"
+        >
+          <div className=" w-full col-span-2">
+            <div className="flex justify-start">
               <div className="relative flex flex-col items-start justify-start mr-4">
                 {product.imageGallery.images.map((image: any, idx: number) => (
                   <div
@@ -87,7 +184,7 @@ const ProductView = ({ product }: GetProductQuery) => {
             <div className="dark:border-gray-600 flex w-full mt-6 overflow-x-scroll text-sm text-gray-900 border-b border-gray-300">
               <button
                 className={clsx(
-                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
                   'dark:text-gray-200 dark:bg-transparent ',
                   'hover:border-gray-900 dark:hover:border-gray-50',
                   active === 0 ? 'border-gray-900 dark:border-gray-50' : ''
@@ -97,7 +194,7 @@ const ProductView = ({ product }: GetProductQuery) => {
               </button>
               <button
                 className={clsx(
-                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
                   'dark:text-gray-200 dark:bg-transparent ',
                   'hover:border-gray-900 dark:hover:border-gray-50',
                   active === 1 ? 'border-gray-50 dark:border-gray-900' : ''
@@ -107,7 +204,7 @@ const ProductView = ({ product }: GetProductQuery) => {
               </button>
               <button
                 className={clsx(
-                  'inline-block mr-8 py-3 text-gray-700 border-b-2 border-transparent',
+                  'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
                   'dark:text-gray-200 dark:bg-transparent ',
                   'hover:border-gray-900 dark:hover:border-gray-50',
                   active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
@@ -117,7 +214,7 @@ const ProductView = ({ product }: GetProductQuery) => {
               </button>
             </div>
             <div
-              className="prose-purple w-full prose"
+              className="prose-purple w-full py-8 prose"
               dangerouslySetInnerHTML={{
                 __html: product.longDescription ?? '',
               }}
@@ -153,8 +250,8 @@ const ProductView = ({ product }: GetProductQuery) => {
             </div>
             <div
               className={clsx(
-                'flex flex-col w-96 p-6 sticky mt-3 top-36',
-                isShadowed && 'rounded-sm shadow-2xl'
+                'flex flex-col w-96 p-6 sticky mt-3 rounded-sm top-32',
+                isShadowed && 'shadow-2xl'
               )}
             >
               <div className="flex items-start py-1 space-x-1">
@@ -209,8 +306,8 @@ const ProductView = ({ product }: GetProductQuery) => {
                                   alt={getFilterVariantsImages(variant)[0] || 'Product Image'}
                                   width={100}
                                   height={100}
-                                  layout="fixed"
-                                  objectFit="contain"
+                                  layout="fill"
+                                  objectFit="fill"
                                   blurDataURL={getFilterVariantsImages(variant)[0]}
                                 />
 
@@ -248,19 +345,43 @@ const ProductView = ({ product }: GetProductQuery) => {
                     +
                   </div>
                 </div>
-                <button className="rounded-3 flex-1 py-4 text-sm font-light text-white bg-black">
+                <button className="rounded-3 flex-1 py-4 text-sm font-light text-white bg-black rounded-sm">
                   Add to cart
                 </button>
               </div>
             </div>
           </aside>
         </div>
-
-        <div className=" w-full py-8 mt-6">
-          <h2 className="text-xl font-semibold text-black capitalize">Related Products</h2>
-          <GridView items={product.crossSelling} />
+        <div className="flex flex-col space-y-4">
+          <div className="container w-full py-6 mx-auto">
+            <h2 className="text-xl font-semibold text-black capitalize">Reviews</h2>
+            {product?.reviews?.map((review) => (
+              <div key={review.id} className="flex items-center py-4">
+                <div className="w-14 h-14 flex items-center justify-center text-lg text-center text-white capitalize bg-gray-400 rounded-full">
+                  {review.reviewer?.firstName.charAt(0)}
+                </div>
+                <div className="flex flex-col ml-3">
+                  <p className="flex items-start space-x-1 text-sm font-medium">
+                    <StarRating count={review.rating}></StarRating>
+                    <span>{`(${review.rating}/5)`}</span>
+                  </p>
+                  <i className="">{review.text}</i>
+                  <p className="text-xs text-gray-700">
+                    <span>{review.reviewer?.firstName}</span>
+                    <span className="px-1">&#8226;</span>
+                    <span>{format(new Date(review.createAt), 'eeee dd MMMM yyyy')}</span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="container w-full py-6 mx-auto">
+            <h2 className="py-2 text-xl font-semibold text-black capitalize">Related Products</h2>
+            <Grid className="py-4" items={product.crossSelling} />
+          </div>
         </div>
       </article>
+
       <NextSeo
         title={product.title}
         description={product.shortDescription}

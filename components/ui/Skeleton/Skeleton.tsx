@@ -1,6 +1,8 @@
 import React, { CSSProperties } from 'react';
-import px from '@lib/to-pixels';
+
 import clsx from 'clsx';
+
+import px from '@lib/to-pixels';
 
 interface SkeletonProps {
   show?: boolean;

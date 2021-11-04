@@ -1,6 +1,7 @@
+import { memo, useEffect, useRef, useState } from 'react';
+
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { memo, useEffect, useRef, useState } from 'react';
 
 interface SearchProps {
   className?: string;

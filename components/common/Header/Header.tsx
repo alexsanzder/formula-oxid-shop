@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
+
+import { useShop } from '@context/AppContext';
+
+import { Category } from '@generated/types';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
-import Searchbar from './Searchbar';
-import Navbar from './Navbar';
-import { Category } from '@generated/types';
+import Navbar from '../Navbar';
+import Searchbar from '../Searchbar';
 
 interface HeaderProps {
   categories: Category[];
 }
 
 const Header = ({ categories }: HeaderProps) => {
+  const {
+    shopState: { isSticky },
+  } = useShop();
   const [isMounted, setIsMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   useEffect(() => {
@@ -55,8 +62,9 @@ const Header = ({ categories }: HeaderProps) => {
       </div>
       <header
         className={clsx(
-          'transition ease-in-out sticky top-0 dark:bg-black z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300',
-          isScrolled && 'shadow-xl'
+          'transition ease-in-out top-0 dark:bg-black z-40 w-full bg-white border-b dark:border-gray-600 border-gray-300',
+          isScrolled && 'shadow-xl',
+          isSticky && 'sticky'
         )}
       >
         <div className="dark:border-gray-600 w-full border-b border-gray-300">

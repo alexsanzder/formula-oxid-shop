@@ -1,6 +1,6 @@
 import { GetStaticPathsResult } from 'next';
 
-import Search from '@components/Search';
+import { Search } from '@components/search';
 import { ssrGetSearchSite } from '@generated/pages';
 
 export const getStaticProps = async () => {

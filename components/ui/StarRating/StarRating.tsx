@@ -1,8 +1,9 @@
-import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
+import clsx from 'clsx';
+
 interface StarRatingProps {
-  className: string;
+  className?: string;
   count: number;
 }
 function StarRating({ className, count }: StarRatingProps) {
@@ -17,7 +18,7 @@ function StarRating({ className, count }: StarRatingProps) {
   }, [count]);
 
   return (
-    <div className={clsx('-ml-px', className)}>
+    <span className={clsx('-ml-px', className)}>
       {[...Array(5)].map((_star, index) => {
         index += 1;
         return (
@@ -40,7 +41,7 @@ function StarRating({ className, count }: StarRatingProps) {
           </button>
         );
       })}
-    </div>
+    </span>
   );
 }
 

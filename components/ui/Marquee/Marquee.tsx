@@ -1,4 +1,5 @@
 import { Children, Component, FC, ReactNode } from 'react';
+
 import { default as FastMarquee } from 'react-fast-marquee';
 
 interface MarqueeProps {

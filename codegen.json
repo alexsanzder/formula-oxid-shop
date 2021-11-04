@@ -1,33 +1,19 @@
 {
   "hooks": {
-    "afterAllFileWrite": [
-      "prettier --write"
-    ]
+    "afterAllFileWrite": ["prettier --write"]
   },
   "overwrite": true,
-  "schema": [
-    "${NEXT_PUBLIC_OXID_GRAPHQL_ENDPOINT}"
-  ],
+  "schema": ["${NEXT_PUBLIC_OXID_GRAPHQL_ENDPOINT}"],
   "documents": "graphql/**/*.graphql",
   "generates": {
     "generated/types.ts": {
-      "plugins": [
-        "typescript",
-        "typescript-operations",
-        "named-operations-object"
-      ]
+      "plugins": ["typescript", "typescript-operations", "named-operations-object"]
     },
     "generated/graphql.tsx": {
-      "plugins": [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-apollo"
-      ]
+      "plugins": ["typescript", "typescript-operations", "typescript-react-apollo"]
     },
     "generated/graphql.schema.json": {
-      "plugins": [
-        "introspection"
-      ]
+      "plugins": ["introspection"]
     },
     "generated/pages.tsx": {
       "config": {
@@ -43,9 +29,7 @@
       "presetConfig": {
         "typesPath": "./types"
       },
-      "plugins": [
-        "graphql-codegen-apollo-next-ssr"
-      ]
+      "plugins": ["graphql-codegen-apollo-next-ssr"]
     }
   }
 }

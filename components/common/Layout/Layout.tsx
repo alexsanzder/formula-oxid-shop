@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
-import Footer from '@components/Footer';
-import Header from '@components/Header';
+
+import { Footer, Header } from '@components/common';
 import { Category, Content, Manufacturer } from '@generated/types';
 
 export interface LayoutProps {
@@ -13,7 +13,7 @@ export interface LayoutProps {
 }
 const Layout = ({
   children,
-  pageProps: { rootCategories = [], pages = [], brands = [], ...pageProps },
+  pageProps: { rootCategories = [], pages = [], brands = [] },
 }: LayoutProps) => {
   return (
     <>

@@ -5,8 +5,9 @@ import {
   InferGetStaticPropsType,
 } from 'next';
 import { useRouter } from 'next/router';
-import Layout from '@components/Layout';
-import ProductView from '@components/ProductView';
+
+import { Layout } from '@components/common';
+import { ProductView } from '@components/product';
 import { ssrGetProducts, ssrGetProductSite } from '@generated/pages';
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext<{ slug: string }>) => {

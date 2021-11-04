@@ -1,7 +1,7 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import { Category } from '@generated/types';
-import clsx from 'clsx';
 
 interface NavbarProps {
   categories: Category[];

@@ -1,4 +1,10 @@
+import { IncomingMessage } from 'http';
+
 import { NextPage } from 'next';
+import {
+  NextApiRequestCookies,
+  // @ts-ignore This path is generated at build time and conflicts otherwise
+} from 'next-server/server/api-utils';
 
 import {
   ApolloClient,
@@ -8,12 +14,6 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
-import {
-  NextApiRequestCookies,
-  // @ts-ignore This path is generated at build time and conflicts otherwise
-} from 'next-server/server/api-utils';
-import { IncomingMessage } from 'http';
 
 export type ApolloClientContext = {
   req?: IncomingMessage & {

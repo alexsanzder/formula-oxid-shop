@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const SORT = {
@@ -20,7 +20,7 @@ const SearchSort = ({ activeFilter, toggleFilter, handleClick }: SearchSortProps
   const { q, sort } = router.query;
 
   return (
-    <div className="lg:col-span-2 lg:order-none order-2 col-span-8">
+    <div className="lg:col-span-1 lg:order-none order-2 float-right col-span-4 text-right">
       <div className="relative inline-block w-full">
         <div className="lg:hidden">
           <span className="rounded-md shadow-sm">
