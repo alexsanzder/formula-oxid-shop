@@ -40,7 +40,7 @@ const Home = ({
 
   useEffect(() => {
     setShopState({ ...shopState, isSticky: true });
-  }, [setShopState]);
+  }, [setShopState, shopState]);
 
   var sliderSettings = {
     dots: true,
