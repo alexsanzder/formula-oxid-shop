@@ -8,6 +8,7 @@ interface StarRatingProps {
 }
 function StarRating({ className, count }: StarRatingProps) {
   const [rating, setRating] = useState(4);
+  // eslint-disable-next-line no-unused-vars
   const [hover, setHover] = useState(0);
 
   useEffect(() => {

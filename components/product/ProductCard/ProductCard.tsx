@@ -16,11 +16,11 @@ interface ListItemProps {
 const placeholderImg = '/product-img-placeholder.svg';
 
 const ProductCard = ({ className, product, imgProps }: ListItemProps) => {
-  const { seo, title, imageGallery, price, rating } = product;
+  const { seo, title, imageGallery, rating } = product;
 
   return (
     <li className={clsx('relative group', className)}>
-      <button className="group-hover:shadow-lg right-3 top-3 absolute z-30 p-4 bg-white rounded">
+      <button className="group-hover:shadow-lg right-5 top-4 dark:bg-black absolute z-30 p-4 bg-white rounded">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"

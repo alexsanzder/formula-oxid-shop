@@ -10,6 +10,7 @@ interface SearchSidebarProps {
   activeCategory: GetSearchSiteQuery['categories'][0] | undefined;
   brands: GetSearchSiteQuery['brands'];
   activeBrand: GetSearchSiteQuery['brands'][0] | undefined;
+  // eslint-disable-next-line no-unused-vars
   handleClick: (arg1: any, arg2: any) => void;
   query: string;
 }

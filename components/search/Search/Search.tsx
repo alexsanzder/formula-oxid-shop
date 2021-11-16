@@ -26,6 +26,7 @@ const Search = ({
   );
 
   const router = useRouter();
+  // eslint-disable-next-line no-unused-vars
   const { asPath, locale } = router;
   const { q, sort } = router.query;
   // `q` can be included but because categories and Branders can't be searched

@@ -37,6 +37,7 @@ const Home = ({
   top,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { shopState, setShopState } = useShop();
+
   useEffect(() => {
     setShopState({ ...shopState, isSticky: true });
   }, [setShopState, shopState]);

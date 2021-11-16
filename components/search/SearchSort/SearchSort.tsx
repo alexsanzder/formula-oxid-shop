@@ -12,11 +12,14 @@ const SORT = {
 interface SearchSortProps {
   activeFilter: string;
   toggleFilter: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleClick: (arg1: any, arg2: any) => void;
 }
 
 const SearchSort = ({ activeFilter, toggleFilter, handleClick }: SearchSortProps) => {
   const router = useRouter();
+  // TODO sort
+  // eslint-disable-next-line no-unused-vars
   const { q, sort } = router.query;
 
   return (

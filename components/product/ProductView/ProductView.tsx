@@ -18,7 +18,8 @@ const ProductView = ({ product }: GetProductQuery) => {
     size: '',
     color: '',
   });
-
+  // TODO set active
+  // eslint-disable-next-line no-unused-vars
   const [active, setActive] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
   const [isShadowed, setIsShadowed] = useState(false);
@@ -96,12 +97,24 @@ const ProductView = ({ product }: GetProductQuery) => {
             >
               Reviews
             </button>
+            {product.accessories.length ? (
+              <button
+                className={clsx(
+                  'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
+                  'dark:text-gray-200 dark:bg-transparent ',
+                  'hover:border-gray-900 dark:hover:border-gray-50',
+                  active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+                )}
+              >
+                Accessories
+              </button>
+            ) : null}
             <button
               className={clsx(
                 'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
                 'dark:text-gray-200 dark:bg-transparent ',
                 'hover:border-gray-900 dark:hover:border-gray-50',
-                active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+                active === 4 ? 'border-gray-50 dark:border-gray-900' : ''
               )}
             >
               Related
@@ -204,19 +217,31 @@ const ProductView = ({ product }: GetProductQuery) => {
               >
                 Reviews
               </button>
+              {product.accessories.length ? (
+                <button
+                  className={clsx(
+                    'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
+                    'dark:text-gray-200 dark:bg-transparent ',
+                    'hover:border-gray-900 dark:hover:border-gray-50',
+                    active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+                  )}
+                >
+                  Accessories
+                </button>
+              ) : null}
               <button
                 className={clsx(
                   'inline-block mr-8 py-4 text-gray-700 border-b-2 border-transparent',
                   'dark:text-gray-200 dark:bg-transparent ',
                   'hover:border-gray-900 dark:hover:border-gray-50',
-                  active === 3 ? 'border-gray-50 dark:border-gray-900' : ''
+                  active === 4 ? 'border-gray-50 dark:border-gray-900' : ''
                 )}
               >
                 Related
               </button>
             </div>
             <div
-              className="prose-purple dark:prose-dark w-full prose"
+              className="prose-purple dark:prose-dark w-full py-4 prose"
               dangerouslySetInnerHTML={{
                 __html: product.longDescription ?? '',
               }}
@@ -373,7 +398,7 @@ const ProductView = ({ product }: GetProductQuery) => {
               <div className="py-3">There are no reviews yet.</div>
             )}
           </div>
-          {product.accessories ? (
+          {product.accessories.length ? (
             <div className="container w-full py-8 mx-auto">
               <h2 className="py-2 text-xl font-semibold text-black capitalize">Accessories</h2>
               <Grid className="py-4" items={product.accessories} />

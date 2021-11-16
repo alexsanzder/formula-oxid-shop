@@ -1,6 +1,5 @@
 import { IncomingMessage } from 'http';
 
-import { NextPage } from 'next';
 import {
   NextApiRequestCookies,
   // @ts-ignore This path is generated at build time and conflicts otherwise
@@ -46,7 +45,8 @@ export const getApolloClient = (
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = process.env.NEXT_PUBLIC_GRAPHQL_API_KEY;
+    // TODO Login
+    //const token = process.env.NEXT_PUBLIC_GRAPHQL_API_KEY;
     // return the headers to the context so httpLink can read them
     return {
       headers: {

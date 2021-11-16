@@ -20,7 +20,6 @@ const Skeleton: React.FC<SkeletonProps> = ({
   height,
   children,
   className,
-  show = true,
   boxHeight = height,
 }) => {
   // Automatically calculate the size if there are children
