@@ -14,8 +14,7 @@
     "analyze": "BUNDLE_ANALYZE=both yarn build",
     "prettier-fix": "prettier --write .",
     "find:unused": "npx next-unused",
-    "generate": "graphql-codegen --config -r dotenv/config",
-    "prepare": "husky install"
+    "generate": "graphql-codegen --config -r dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
