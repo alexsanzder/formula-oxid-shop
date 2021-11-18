@@ -18,7 +18,7 @@ const Topbar = () => {
           </span>
           <a
             className="hover:text-gray-300 bg-gradient-to-r from-purple-600 to-blue-600 dark:hover:bg-gradient-to-l hover:shadow-md px-4 py-0.5 text-white rounded-full"
-            href="https://github.com/alexsanzder/formula-oxid-shop"
+            href="https://github.com/OXID-eSales/formula-oxid-storefront"
           >
             Learn more
           </a>
