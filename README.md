@@ -41,7 +41,7 @@ Formula integrates it out-of-the-box with an OXID eShop GraphQL endpoint, it ass
 1. Clone the project
 
    ```bash
-   git clone git@github.com:alexsanzder/formula-oxid-storefront.git
+   git@github.com:OXID-eSales/formula-oxid-storefront.git
    ```
 
 2. Access the project directory
