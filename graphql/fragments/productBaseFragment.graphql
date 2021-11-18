@@ -1,0 +1,20 @@
+fragment ProductBaseFragment on Product {
+  id
+  active
+  title
+  seo {
+    slug
+    url
+  }
+  price {
+    currency {
+      sign
+    }
+    price
+  }
+  rating {
+    rating
+    count
+  }
+  shortDescription
+}

@@ -1,0 +1,52 @@
+#import ../fragments/productBaseFragment.graphql
+query GetProduct($slug: String!) {
+  product(slug: $slug) {
+    ...ProductBaseFragment
+    longDescription
+    imageGallery {
+      images {
+        image
+        icon
+        zoom
+      }
+    }
+    variantLabels
+    variants {
+      ...ProductBaseFragment
+      variantValues
+      imageGallery {
+        icon
+      }
+    }
+    categories(onlyMainCategory: false) {
+      parent {
+        parent {
+          title
+        }
+        title
+      }
+      title
+    }
+    reviews {
+      id
+      text
+      reviewer {
+        firstName
+      }
+      createAt
+      rating
+    }
+    accessories {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
+    }
+    crossSelling {
+      ...ProductBaseFragment
+      imageGallery {
+        thumb
+      }
+    }
+  }
+}

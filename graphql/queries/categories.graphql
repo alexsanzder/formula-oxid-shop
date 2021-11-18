@@ -1,0 +1,10 @@
+#import ../fragments/categoryBaseFragment.graphql
+
+query GetCategories($filter: CategoryFilterList) {
+  categories(filter: $filter) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
+    }
+  }
+}

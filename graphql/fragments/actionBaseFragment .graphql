@@ -1,0 +1,5 @@
+fragment ActionBaseFragment on Action {
+  id
+  active
+  title
+}

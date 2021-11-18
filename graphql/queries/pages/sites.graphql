@@ -1,0 +1,27 @@
+#import ../../fragments/categoryBaseFragment.graphql
+#import ../../fragments/contentBaseFragment.graphql
+
+query GetSites($contentId: ID!) {
+  rootCategories: categories(filter: { parentId: { equals: "oxrootid" } }) {
+    ...CategoryBaseFragment
+    children {
+      ...CategoryBaseFragment
+    }
+  }
+
+  pages: contents {
+    ...ContentBaseFragment
+  }
+
+  page: content(contentId: $contentId) {
+    ...ContentBaseFragment
+    content
+  }
+
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
+}

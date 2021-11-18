@@ -1,0 +1,8 @@
+query GetManufactures {
+  brands: manufacturers {
+    id
+    active
+    title
+    icon
+  }
+}
