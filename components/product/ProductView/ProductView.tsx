@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 
-import { useShop } from '@context/AppContext';
+import { useShop } from '@context/ShopContext';
 
 import { Grid, StarRating } from '@components/ui';
 import { GetProductQuery } from '@generated/types';
@@ -433,7 +433,6 @@ const ProductView = ({ product }: GetProductQuery) => {
           ) : null}
         </div>
       </article>
-
       <NextSeo
         title={product.title}
         description={product.shortDescription}

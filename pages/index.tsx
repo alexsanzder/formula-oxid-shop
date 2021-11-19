@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 
-import { useShop } from '@context/AppContext';
+import { useShop } from '@context/ShopContext';
 
 import { Layout } from '@components/common';
 import { Grid, Marquee } from '@components/ui';
@@ -40,7 +40,8 @@ const Home = ({
 
   useEffect(() => {
     setShopState({ ...shopState, isSticky: true });
-  }, [setShopState, shopState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   var sliderSettings = {
     dots: true,

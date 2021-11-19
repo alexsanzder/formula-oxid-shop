@@ -10,7 +10,6 @@
     "prettier"
   ],
   "rules": {
-    "no-unused-vars": "error",
     "react/no-unescaped-entities": "off",
     "import/no-extraneous-dependencies": "off",
     "import/order": [

@@ -6,7 +6,7 @@ import { FC, useEffect } from 'react';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
-import ShopProvider from '@context/AppContext';
+import ShopProvider from '@context/ShopContext';
 
 import { Head } from '@components/common';
 
