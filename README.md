@@ -1,4 +1,4 @@
-[<img align="right" src="https://github.com/OXID-eSales/formula-oxid-storefront/blob/main/public/logo.svg?sanitize=true" width="30%">]()
+[<img align="right" src="https://github.com/OXID-eSales/formula-oxid-storefront/blob/main/public/logo.svg?sanitize=true" width="30%" />]()
 
 # Formula = React + GraphQL OXID Storefront
 
