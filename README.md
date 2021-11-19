@@ -12,6 +12,7 @@ This is an all-in-one starter kit for OXID eSales frontend shops.
 - [NextJS](https://www.nextjs.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [TailwindCSS](https://tailwindcss.com)
+- [Heroicons](https://heroicons.com/)
 - [ApolloClient](https://www.apollographql.com/docs/react/)
 - [GraphQL Code Generator](https://www.graphql-code-generator.com/)
 - [Jest](https://jestjs.io)
@@ -56,7 +57,19 @@ Formula integrates it out-of-the-box with an OXID eShop GraphQL endpoint, it ass
    yarn install
    ```
 
-4. Serve with hot reload at http://localhost:3000
+4. Copy the .env.template file to .env and add your OXID GraphQL Shop endpoint
+
+   ```bash
+   cp .env.template .env
+   ```
+
+5. Generate code from your GraphQL schema and operations
+
+   ```bash
+   yarn generate
+   ```
+
+6. Serve with hot reload at http://localhost:3000
    ```bash
    yarn dev
    ```
