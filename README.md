@@ -117,4 +117,4 @@ yarn lint
 
 This project is licensed under the MIT License.
 
-#### Inspired by [Next.js Commerce]("https://nextjs.org/commerce")
+#### Inspired by [Next.js Commerce](https://nextjs.org/commerce)
