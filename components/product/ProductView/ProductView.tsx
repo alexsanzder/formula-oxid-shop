@@ -35,7 +35,7 @@ const ProductView = ({ product }: GetProductQuery) => {
     product?.variants.length ??
       setState({
         size: 'M',
-        color: product?.variants[0]?.variantValues[1],
+        color: product.variants[0].variantValues[1],
       });
   }, [product]);
 
