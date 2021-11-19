@@ -29,12 +29,21 @@ To keep the code base of commitlint neat and tidy the following rules apply to e
 - Be awesome
 
 ## Commit Rules
+
 > [Conventional Commits specification](https://conventionalcommits.org/)
 
-- message format of `$type($scope): $message`
-- husky commit message hook available
-- present tense
-- maximum of 100 characters
+- Message format of `$type($scope): $message`
+- Husky commit message hook available
+
+#### Seven rules for a great commit message
+
+1. Separate subject from the body with a blank line
+2. Limit the subject line to 50 characters
+3. Capitalize the subject line
+4. Do not end the subject line with a period
+5. Use the imperative mood in the subject line
+6. Wrap the body at 72 characters
+7. Use the body to explain what and why vs. how
 
 ## License
 

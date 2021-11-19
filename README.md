@@ -2,6 +2,8 @@
 
 # Formula = React + GraphQL OXID Storefront
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
 This is **FORMULA** a [React](https://reactjs.org) + [GraphQL](https://github.com/OXID-eSales/graphql-storefront-module) + [OXID eSales](https://oxid-esales.com) **Storefront**, built with [NextJS](https://www.nextjs.org), [TypeScript](https://www.typescriptlang.org/) and completely styled with [Tailwind CSS](https://tailwindcss.com/).
 
 This is an all-in-one starter kit for OXID eSales frontend shops.
@@ -112,6 +114,13 @@ yarn lint
   ```bash
   yarn test:e2e
   ```
+
+## Style Guide
+
+All pull requests SHOULD adhere to the [Conventional Commits specification](https://conventionalcommits.org/)
+
+- Message format of `$type($scope): $message`
+- Husky commit message hook available
 
 ### License
 
