@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { useShop } from '@context/ShopContext';
 
-import { Topbar, Navbar, Searchbar, Modal } from '@components/common';
+import { Topbar, Navbar, Searchbar, Login } from '@components/common';
 import { Category } from '@generated/types';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
@@ -59,13 +59,13 @@ const Header = ({ categories }: HeaderProps) => {
             <Link href="/">
               <a className="flex items-center justify-center text-2xl font-semibold tracking-tight">
                 <Image src="/logo.svg" height={50} width={50} alt="Formula Logo" />
-                <span className="dark:text-gray-300 ml-1 capitalize">Formula</span>
+                <h3 className="dark:text-gray-300 ml-1 capitalize">Formula</h3>
               </a>
             </Link>
             <Searchbar />
             <div className="dark:text-gray-100 flex items-center space-x-4 text-xs text-gray-600">
               <button
-                className="dark:hover:text-gray-400 hover:text-gray-600 hover:underline pr-6 font-semibold"
+                className="dark:hover:text-gray-400 hover:text-gray-600 hover:underline px-4 font-semibold"
                 onClick={() => setShowModal(!showModal)}
               >
                 Sign In
@@ -154,69 +154,7 @@ const Header = ({ categories }: HeaderProps) => {
           </button>
         </div>
       </header>
-      {showModal && (
-        <Modal setShowModal={setShowModal} showModal={showModal}>
-          <div className="sm:my-8 sm:align-middle sm:max-w-lg sm:w-full inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl">
-            <div className="sm:p-6 sm:pb-4 px-4 pt-5 pb-4 bg-white">
-              <div className="flex items-center justify-between w-full pb-4 border-b border-gray-300">
-                Login or Register
-                <button className="" onClick={() => setShowModal(!showModal)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div className="sm:flex sm:items-start py-8">
-                <div className="sm:mt-0 sm:ml-4 sm:text-left mt-4 text-center">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900" id="modal-title">
-                    Welcome to Formula
-                  </h3>
-                  <div className="flex flex-col mt-4 space-y-2">
-                    <div>
-                      <label className="text-sm" htmlFor="email">
-                        Email
-                      </label>
-                      <input
-                        className="focus:outline-none w-full px-4 py-2 border border-gray-600 rounded-sm"
-                        type="email"
-                        name="email"
-                      />
-                    </div>
-                    <button className="w-full px-4 py-2 text-white bg-black border border-black rounded-sm">
-                      Continue
-                    </button>
-                  </div>
-                  <div className="mt-8">
-                    <p className="text-xs text-gray-500">
-                      By signing up, you agree to our
-                      <Link href="/">
-                        <a className="font-semibold underline"> Terms of Use</a>
-                      </Link>{' '}
-                      and{' '}
-                      <Link href="/">
-                        <a className="font-semibold underline"> Privacy Policy</a>
-                      </Link>
-                      . We may send you communications; you may change your preferences in your
-                      account settings
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Modal>
-      )}
+      {showModal && <Login setShowModal={setShowModal} showModal={showModal} />}
     </>
   );
 };

@@ -66,7 +66,7 @@ const Searchbar = ({ id = 'search' }: SearchProps) => {
   };
 
   return (
-    <div className="flex-1 px-8">
+    <div className="flex-1 px-4">
       <span className="bg-gradient-to-r from-purple-600 to-blue-600 flex items-center relative p-0.5 rounded-full">
         <label className="hidden" htmlFor={id}>
           Search

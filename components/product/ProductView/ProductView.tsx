@@ -297,7 +297,7 @@ const ProductView = ({ product }: GetProductQuery) => {
             </div>
             <div
               className={clsx(
-                'flex flex-col w-96 p-6 sticky mt-3 rounded-sm top-32 border border-transparent',
+                'flex flex-col w-96 p-6 sticky mt-3 rounded-sm top-36 border border-transparent',
                 isShadowed && 'shadow-2xl dark:border-gray-700'
               )}
             >
