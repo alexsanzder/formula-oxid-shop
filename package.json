@@ -10,7 +10,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --no-cache",
+    "lint": "next lint",
     "analyze": "BUNDLE_ANALYZE=both yarn build",
     "prettier-fix": "prettier --write .",
     "find:unused": "npx next-unused",

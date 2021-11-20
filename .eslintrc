@@ -16,6 +16,7 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "import/no-extraneous-dependencies": "off",
+    "@next/next/no-document-import-in-page": "off",
     "import/order": [
       "error",
       {
