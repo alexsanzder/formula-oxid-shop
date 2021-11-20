@@ -31,7 +31,7 @@ jobs:
         cache: "yarn"
         cache-dependency-path: "**/yarn.lock"
         
-    - run: yarn --pure-lockfile      
+    - run: yarn --frozen-lockfile     
     - run: yarn lint
     - run: yarn test:ci
     - run: yarn build
