@@ -3,9 +3,10 @@ import { render, screen } from '@testing-library/react';
 
 describe('StarRating', () => {
   it('should render 5 stars and have 1 star rating', () => {
-    const { container } = render(<StarRating count={1} />);
+    render(<StarRating count={1} />);
 
-    expect(screen.getAllByRole('button')).toHaveLength(5);
-    expect(container.getElementsByClassName('text-yellow-400')).toHaveLength(1);
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(5);
+    expect(buttons[0]).toHaveClass('text-yellow-400');
   });
 });
