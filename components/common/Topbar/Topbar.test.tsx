@@ -6,7 +6,7 @@ describe('Topbar', () => {
   it('should render topbar and dismiss it', () => {
     render(<Topbar />);
     expect(screen.getByRole('alert')).toBeInTheDocument();
-    user.click(screen.getByRole('button', { name: /Dismiss topbar/i }));
+    user.click(screen.getByRole('button', { name: /dismiss topbar/i }));
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 });

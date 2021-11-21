@@ -6,14 +6,15 @@ interface ModalProps {
   showModal: boolean;
   setShowModal: (arg: boolean) => void;
   children: React.ReactNode;
+  label: string;
 }
-const Modal = ({ children, showModal, setShowModal }: ModalProps) => {
+const Modal = ({ children, showModal, setShowModal, label }: ModalProps) => {
   return (
     <>
       <Portal>
         <div
           className="fixed inset-0 z-[100] overflow-y-auto"
-          aria-labelledby="modal-title"
+          aria-labelledby={label}
           role="dialog"
           aria-modal="true"
         >

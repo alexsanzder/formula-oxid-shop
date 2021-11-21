@@ -57,7 +57,7 @@ const Header = ({ categories }: HeaderProps) => {
         <div className="dark:border-gray-700 w-full border-b border-gray-300">
           <div className="container flex items-center py-4 mx-auto text-sm">
             <Link href="/">
-              <a className="flex items-center justify-center text-2xl font-semibold tracking-tight">
+              <a className="flex items-center justify-center pr-4 text-2xl font-semibold tracking-tight">
                 <Image src="/logo.svg" height={50} width={50} alt="Formula Logo" />
                 <h3 className="dark:text-gray-300 ml-1 capitalize">Formula</h3>
               </a>
