@@ -4,7 +4,7 @@ import ShopProvider from '@context/ShopContext';
 
 import Header from '@components/common/Header';
 import { createMockRouter } from '@test-utils/createMockRouter';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import user from '@testing-library/user-event';
 
 const MyComponent = () => (
@@ -16,7 +16,12 @@ const MyComponent = () => (
 );
 
 describe('Header', () => {
-  const setup = () => render(<MyComponent />);
+  const setup = () => {
+    const portalRoot = document.createElement('div');
+    portalRoot.setAttribute('id', 'portal');
+    document.body.appendChild(portalRoot);
+    render(<MyComponent />);
+  };
 
   it('should render topbar, logo, searchbox and login button', () => {
     setup();
@@ -28,11 +33,15 @@ describe('Header', () => {
 
   it('should open the login modal', () => {
     setup();
-    const portalRoot = document.createElement('div');
-    portalRoot.setAttribute('id', 'portal');
-    document.body.appendChild(portalRoot);
 
     user.click(screen.getByRole('button', { name: /sign in/i }));
     expect(screen.getByRole('dialog', { name: /welcome to formula/i })).toBeInTheDocument();
+  });
+
+  it('be sticky when the user scroll the page', () => {
+    setup();
+    expect(screen.getByRole('header')).not.toHaveClass('shadow-xl');
+    fireEvent.scroll(window, { target: { scrollY: 300 } });
+    expect(screen.getByRole('header')).toHaveClass('shadow-xl');
   });
 });

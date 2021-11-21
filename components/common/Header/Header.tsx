@@ -19,6 +19,7 @@ const Header = ({ categories }: HeaderProps) => {
   const {
     shopState: { isSticky },
   } = useShop();
+
   const [isMounted, setIsMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   useEffect(() => {
@@ -53,6 +54,7 @@ const Header = ({ categories }: HeaderProps) => {
           isScrolled && 'shadow-xl',
           isSticky && 'sticky'
         )}
+        role="header"
       >
         <div className="dark:border-gray-700 w-full border-b border-gray-300">
           <div className="container flex items-center py-4 mx-auto text-sm">

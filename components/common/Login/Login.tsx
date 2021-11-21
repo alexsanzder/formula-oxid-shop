@@ -14,7 +14,7 @@ function Login({ showModal, setShowModal }: LoginProps) {
         <div className="sm:p-6 sm:pb-3 px-4 pt-5 bg-white">
           <div className="flex items-center justify-between w-full pb-4 border-b border-gray-300">
             Login or Register
-            <button className="" onClick={() => setShowModal(!showModal)}>
+            <button onClick={() => setShowModal(!showModal)} aria-label="Close modal">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-4 h-4"
@@ -57,7 +57,10 @@ function Login({ showModal, setShowModal }: LoginProps) {
                     name="password"
                   />
                 </div>
-                <button className="w-full px-4 py-2 text-white bg-black border border-black rounded-sm">
+                <button
+                  className="w-full px-4 py-2 text-white bg-black border border-black rounded-sm"
+                  aria-label="Continue"
+                >
                   Continue
                 </button>
               </div>
