@@ -29,11 +29,11 @@ describe('Header', () => {
     expect(screen.getByAltText(/logo/i)).toBeInTheDocument();
     expect(screen.getByRole('searchbox')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /toggle dark theme/i })).toBeInTheDocument();
   });
 
   it('should open the login modal', () => {
     setup();
-
     user.click(screen.getByRole('button', { name: /sign in/i }));
     expect(screen.getByRole('dialog', { name: /welcome to formula/i })).toBeInTheDocument();
   });
@@ -43,5 +43,16 @@ describe('Header', () => {
     expect(screen.getByRole('header')).not.toHaveClass('shadow-xl');
     fireEvent.scroll(window, { target: { scrollY: 300 } });
     expect(screen.getByRole('header')).toHaveClass('shadow-xl');
+  });
+
+  it('it should switch to darkmode', () => {
+    setup();
+    expect(screen.getByRole('header')).toHaveStyle({
+      backgroundColor: 'rgba(255, 255, 255, var(--tw-bg-opacity))',
+    });
+    user.click(screen.getByRole('button', { name: /toggle dark theme/i }));
+    expect(screen.getByRole('header')).toHaveStyle({
+      backgroundColor: 'rgba(0, 0, 0, var(--tw-bg-opacity))',
+    });
   });
 });

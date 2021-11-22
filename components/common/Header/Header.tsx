@@ -78,6 +78,7 @@ const Header = ({ categories }: HeaderProps) => {
                   'dark:bg-transparent dark:hover:text-gray-400',
                   'hover:border-gray-600 hover:text-gray-600 hover:bg-gray-100'
                 )}
+                aria-label="Toggle dark theme"
                 onClick={switchTheme}
               >
                 <svg
