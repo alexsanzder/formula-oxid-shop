@@ -1,7 +1,3 @@
-import { RouterContext } from 'next/dist/shared/lib/router-context';
-
-import ShopProvider from '@context/ShopContext';
-
 import Login from '@components/common/Login';
 import { render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
