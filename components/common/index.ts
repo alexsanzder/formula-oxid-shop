@@ -6,6 +6,6 @@ export { default as Login } from './Login';
 export { default as Modal } from './Modal';
 export { default as Navbar } from './Navbar';
 export { default as Portal } from './Portal';
-export { default as QuantityButton } from './QuantityButton';
+export { default as QuantityInput } from './QuantityInput';
 export { default as Topbar } from './Topbar';
 export { default as Searchbar } from './Searchbar';

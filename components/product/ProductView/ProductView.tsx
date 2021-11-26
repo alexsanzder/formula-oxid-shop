@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import { useShop } from '@context/ShopContext';
 
-import { QuantityButton } from '@components/common';
+import { QuantityInput } from '@components/common';
 import { Grid, StarRating } from '@components/ui';
 import { GetProductQuery } from '@generated/types';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
@@ -377,7 +377,7 @@ const ProductView = ({ product }: GetProductQuery) => {
                   ))
                 : null}
               <div className="flex w-full pt-6 space-x-2">
-                <QuantityButton />
+                <QuantityInput />
                 <button className="rounded-3 dark:bg-white dark:text-black flex-1 py-4 text-sm font-medium text-white bg-black rounded-sm">
                   Add to cart
                 </button>
