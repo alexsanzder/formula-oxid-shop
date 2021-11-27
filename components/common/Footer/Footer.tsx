@@ -3,14 +3,14 @@ import Link from 'next/link';
 import { Content, Manufacturer } from '@generated/types';
 
 interface FooterProps {
-  pages: Content[];
-  brands: Manufacturer[];
+  pages: Pick<Content, 'id' | 'title' | 'folder'>[];
+  brands: Pick<Manufacturer, 'id' | 'title'>[];
 }
 
 const links = [
   {
+    id: 'home',
     title: 'Home',
-    id: '',
   },
 ];
 

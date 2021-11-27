@@ -2,8 +2,6 @@ import Login from '@components/common/Login';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 
-afterEach(cleanup);
-
 const setShowModal = jest.fn();
 const setup = () => {
   // eslint-disable-next-line testing-library/no-node-access
@@ -19,6 +17,8 @@ const setup = () => {
 };
 
 describe('Login', () => {
+  afterEach(cleanup);
+
   it('render login modal and close it', () => {
     setup();
 
