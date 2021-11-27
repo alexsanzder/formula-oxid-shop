@@ -1,13 +1,39 @@
 import Link from 'next/link';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
 
 import { Modal } from '@components/common/';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface LoginProps {
   showModal: boolean;
   setShowModal: (arg: boolean) => void;
 }
 
+type LoginFormInputs = {
+  email: string;
+  password: string;
+};
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+});
+
 function Login({ showModal, setShowModal }: LoginProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<LoginFormInputs>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
+    console.log(data), reset();
+  };
+
   return (
     <Modal setShowModal={setShowModal} showModal={showModal} label="login">
       <div className="sm:my-8 sm:align-middle sm:max-w-lg sm:w-full inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl">
@@ -36,16 +62,20 @@ function Login({ showModal, setShowModal }: LoginProps) {
               <h3 className="text-lg font-medium leading-6 text-gray-900" id="login">
                 Welcome to Formula
               </h3>
-              <div className="flex flex-col mt-4 space-y-2">
+              <form className="flex flex-col mt-4 space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label className="text-sm" htmlFor="email">
                     Email
                   </label>
                   <input
                     className="focus:outline-none w-full px-4 py-2 border border-gray-600 rounded-sm"
+                    id="email"
                     type="email"
-                    name="email"
+                    {...register('email')}
                   />
+                  {errors.email && (
+                    <span className="text-xs text-red-600">{errors.email.message}</span>
+                  )}
                 </div>
                 <div>
                   <label className="text-sm" htmlFor="password">
@@ -53,17 +83,22 @@ function Login({ showModal, setShowModal }: LoginProps) {
                   </label>
                   <input
                     className="focus:outline-none w-full px-4 py-2 border border-gray-600 rounded-sm"
+                    id="password"
                     type="password"
-                    name="password"
+                    {...register('password')}
                   />
+                  {errors.password && (
+                    <span className="text-xs text-red-600">{errors.password.message}</span>
+                  )}
                 </div>
                 <button
-                  className="w-full px-4 py-2 text-white bg-black border border-black rounded-sm"
-                  aria-label="Continue"
+                  className="w-full px-4 py-4 text-white bg-black border border-black rounded-sm"
+                  aria-label="Sign in"
+                  type="submit"
                 >
-                  Continue
+                  Sign in
                 </button>
-              </div>
+              </form>
               <div className="mt-8">
                 <p className="text-xs text-gray-500">
                   By signing up, you agree to our

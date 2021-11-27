@@ -17,7 +17,7 @@ const QuantityInput = () => {
       >
         -
       </button>
-      <label>{amount}</label>
+      <span>{amount}</span>
       <button
         className="dark:text-white text-black"
         tabIndex={0}
