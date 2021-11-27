@@ -71,6 +71,7 @@ function Login({ showModal, setShowModal }: LoginProps) {
                     className="focus:outline-none w-full px-4 py-2 border border-gray-600 rounded-sm"
                     id="email"
                     type="email"
+                    aria-required="true"
                     {...register('email')}
                   />
                   {errors.email && (
@@ -85,6 +86,7 @@ function Login({ showModal, setShowModal }: LoginProps) {
                     className="focus:outline-none w-full px-4 py-2 border border-gray-600 rounded-sm"
                     id="password"
                     type="password"
+                    aria-required="true"
                     {...register('password')}
                   />
                   {errors.password && (

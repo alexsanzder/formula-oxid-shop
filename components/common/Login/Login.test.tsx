@@ -31,6 +31,9 @@ describe('Login', () => {
   it('test clicking the submit button should validate the form', async () => {
     setup();
 
+    expect(screen.getByLabelText(/email/i)).toBeRequired();
+    expect(screen.getByLabelText(/password/i)).toBeRequired();
+
     expect(screen.queryByText(/email is a required field/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/password must be at least 8 characters/i)).not.toBeInTheDocument();
 
