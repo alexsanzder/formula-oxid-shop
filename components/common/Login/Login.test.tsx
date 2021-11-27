@@ -31,12 +31,12 @@ describe('Login', () => {
   it('test clicking the submit button should validate the form', async () => {
     setup();
 
-    expect(screen.queryByText('email is a required field')).not.toBeInTheDocument();
-    expect(screen.queryByText('password must be at least 8 characters')).not.toBeInTheDocument();
+    expect(screen.queryByText(/email is a required field/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/password must be at least 8 characters/i)).not.toBeInTheDocument();
 
     user.click(screen.getByText(/sign in/i));
-    await screen.findByText('email is a required field');
-    await screen.findByText('password must be at least 8 characters');
+    await screen.findByText(/email is a required field/i);
+    await screen.findByText(/password must be at least 8 characters/i);
   });
 
   it('test adding correct input values should submit the form', async () => {
@@ -47,8 +47,8 @@ describe('Login', () => {
     user.click(screen.getByText(/sign in/i));
 
     await waitFor(() => {
-      expect(screen.queryByText('email is a required field')).not.toBeInTheDocument();
+      expect(screen.queryByText(/email is a required field/i)).not.toBeInTheDocument();
     });
-    expect(screen.queryByText('password must be at least 8 characters')).toBeNull();
+    expect(screen.queryByText(/password must be at least 8 characters/i)).toBeNull();
   });
 });
