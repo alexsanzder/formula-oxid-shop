@@ -6,7 +6,7 @@ import { Content, Manufacturer } from '@generated/types';
 import { createMockRouter } from '@test-utils/createMockRouter';
 import { render, screen } from '@testing-library/react';
 
-const setup = ({ pages, brands }) => {
+const setup = ({ pages, brands }: any) => {
   const MyComponent = () => (
     <RouterContext.Provider value={createMockRouter({ query: { q: 'kite' } })}>
       <Footer pages={pages} brands={brands} />
