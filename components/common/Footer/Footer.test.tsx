@@ -2,7 +2,6 @@ import MockDate from 'mockdate';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 
 import Footer from '@components/common/Footer';
-import { Content, Manufacturer } from '@generated/types';
 import { createMockRouter } from '@test-utils/createMockRouter';
 import { render, screen } from '@testing-library/react';
 

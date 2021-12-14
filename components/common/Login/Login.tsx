@@ -31,7 +31,8 @@ function Login({ showModal, setShowModal }: LoginProps) {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
-    console.log(data), reset();
+    console.log(data);
+    reset();
   };
 
   return (
