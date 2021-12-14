@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['formula.localhost'],
+    domains: ['formula.localhost', 'oc-core-dev.oxid.dev'],
     pageExtensions: ['page.tsx'],
   },
 };
